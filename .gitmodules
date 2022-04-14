@@ -1,0 +1,44 @@
+[submodule "oca-addons/account-analytic"]
+	path = oca-addons/account-analytic
+	url = https://github.com/OCA/account-analytic
+	branch = 14.0
+[submodule "oca-addons/account-financial-tools"]
+	path = oca-addons/account-financial-tools
+	url = https://github.com/OCA/account-financial-tools
+	branch = 14.0
+[submodule "oca-addons/server-tools"]
+	path = oca-addons/server-tools
+	url = https://github.com/OCA/server-tools
+	branch = 14.0
+[submodule "oca-addons/sale-workflow"]
+	path = oca-addons/sale-workflow
+	url = https://github.com/OCA/sale-workflow
+	branch = 13.0
+[submodule "oca-addons/purchase-workflow"]
+	path = oca-addons/purchase-workflow
+	url = https://github.com/OCA/purchase-workflow
+	branch = 14.0
+[submodule "oca-addons/stock-logistics-warehouse"]
+	path = oca-addons/stock-logistics-warehouse
+	url = https://github.com/OCA/stock-logistics-warehouse
+	branch = 15.0
+[submodule "oca-addons/stock-logistics-workflow"]
+	path = oca-addons/stock-logistics-workflow
+	url = https://github.com/OCA/stock-logistics-workflow
+	branch = 15.0
+[submodule "oca-addons/web"]
+	path = oca-addons/web
+	url = https://github.com/OCA/web
+	branch = 15.0
+[submodule "oca-addons/web"]
+	path = oca-addons/web
+	url = https://github.com/OCA/web
+	branch = 15.0
+[submodule "oca-addons/l10n-france"]
+	path = oca-addons/l10n-france
+	url = https://github.com/OCA/l10n-france
+	branch = 15.0
+[submodule "extra-addons/JayVora-SerpentCS"]
+	path = extra-addons/JayVora-SerpentCS
+	url = https://github.com/JayVora-SerpentCS	
+	branch = 14.0
