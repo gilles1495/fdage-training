@@ -141,7 +141,7 @@
                 report_type="qweb-pdf"
                 file="faal_tempo.faal_sale_order_report_repere"
                 name="faal_tempo.faal_sale_order_report_repere"
-                print_report_name="(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))" />
+                print_report_name="(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))"/>
 
         <report
                 id="action_report_faal_saleorder"
