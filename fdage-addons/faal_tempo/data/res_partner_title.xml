@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="res_partner_title_1" model="res.partner.title">
+            <field name="name">Monsieur</field>
+            <field name="shortcut">M</field>
+        </record>
+        <record id="res_partner_title_2" model="res.partner.title">
+            <field name="name">Madame</field>
+            <field name="shortcut">MME</field>
+        </record>
+    </data>
+</odoo>

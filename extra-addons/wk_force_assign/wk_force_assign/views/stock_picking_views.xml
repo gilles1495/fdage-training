@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <record id="view_picking_form_wk_inherit" model="ir.ui.view">
+        <field name="name">view.picking.form.wk.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//button[@name="action_assign"]' position='after'>
+                <button name="wk_force_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}" 
+                string="Force Availability" type="object" class="oe_highlight" groups="base.group_user"/>
+                <button name="%(wk_partial_force_assign)d" attrs="{'invisible': [('show_check_availability', '=', False)]}"
+                string="Partial Force Assign" type="action" class="oe_highlight" groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

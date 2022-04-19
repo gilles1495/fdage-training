@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                <attribute name="widget">faal_client_address_render</attribute>
+                <attribute name="context">{'show_address': 1,'default_parent_id': partner_id, 'default_type': 'invoice', 'mail_notrack':True, 'mail_create_nolog':True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                <attribute name="widget">faal_client_address_render</attribute>
+                <attribute name="context">{'show_address': 1,'default_parent_id': partner_id, 'default_type': 'delivery', 'mail_notrack':True, 'mail_create_nolog':True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="sale_order_name_ref" invisible="1" />
+                <field name="repere_delay" attrs="{'invisible':[('sale_order_name_ref', '!=', 'ARGOS')]}" />
+                <field name="repere_more_information" attrs="{'invisible':[('sale_order_name_ref', '!=', 'ARGOS')]}" />
+                <field name="repere_note" attrs="{'invisible':[('sale_order_name_ref', '!=', 'ARGOS')]}" />
+            </xpath>
+
+            <xpath expr="//field[@name='date_order'][2]" position="attributes">
+                <attribute name="widget">date</attribute>
+            </xpath>
+
+            <field name="commitment_date" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+
+            <field name="partner_shipping_id" position="after">
+                <field name="contact_id" widget="faal_contact" context="{'default_parent_id': partner_id, 'default_type': 'contact', 'mail_notrack':True, 'mail_create_nolog':True}" />
+                <field name="ref" />
+            </field>
+
+            <field name="partner_id" position="attributes">
+                <attribute name="widget">faal_client_render</attribute>
+            </field>
+
+            <field name="payment_term_id" position="after">
+                <field name="ref_swing_id" />
+                <field name="ep_number_swing" string="Référence CEGID"/>
+                <field name="wallet_date" widget="date"/>
+                <field name="wallet_period" />
+                <field name="swing_import_error" />
+                <field name="new_order" />
+                <field name="urgent" />
+            </field>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="decoration-danger">not display_type and not amount_within_10_pc_of_list_price</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="amount_within_10_pc_of_list_price" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="list_price" optional="show"/>
+            </xpath>
+            <page name="other_information" position="after">
+                <page string="Commentaires" name="swing_comment">
+                    <field name="note_swing" />
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="sale_order_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="date_order" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="commitment_date" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="expected_date" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_quotation_view_inherit" model="ir.ui.view">
+        <field name="name">sale.quotation.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <field name="create_date" position="replace">
+                <field name="date_order" widget="date"/>
+                <field name="wallet_date" widget="date" />
+            </field>
+            <field name="commitment_date" position="attributes">
+                <attribute name="widget">date</attribute>
+            </field>
+            <field name="partner_id" position="before">
+                <field name="partner_id_code" />
+            </field>
+            <field name="partner_id" position="after">
+                <field name="partner_id_city" />
+                <field name="partner_id_zip" />
+            </field>
+            <field name="amount_total" position="before">
+                <field name="total_ht_without_port" sum="Total HT hors frais de port"/>
+                <field name="total_port_value" sum="Total Frais de port"/>
+            </field>
+            <field name="expected_date" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">not all_lines_amount_within_10_pc_of_list_price</attribute>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <field name="all_lines_amount_within_10_pc_of_list_price" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_sale_order_quotation_inherit_search" model="ir.ui.view">
+      <field name="name">sale.order.quotation.search.expand.filter</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+      <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+          <field name="wallet_period" string="Portefeuille"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="view_sale_order_inherit_search" model="ir.ui.view">
+      <field name="name">sale.order.search.expand.filter</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+      <field name="arch" type="xml">
+        <xpath expr="//search" position="inside">
+          <field name="wallet_period" string="Portefeuille"/>
+        </xpath>
+      </field>
+    </record>
+</odoo>

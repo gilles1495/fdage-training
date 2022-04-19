@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+
+    <t t-name="faal_tempo.faal_contact_template">
+        <div>
+           Test bryan widget
+        </div>
+    </t>
+
+</template>

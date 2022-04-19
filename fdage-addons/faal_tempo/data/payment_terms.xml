@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="V01" model="account.payment.term">
+            <field name="name">VIR 30 J</field>
+            <field name="code">V01</field>
+            <field name="line_ids" eval="[(5, 0), (0, 0, {'value': 'balance', 'value_amount': 0.0, 'sequence': 500, 'days': 30, 'option': 'day_after_invoice_date'})]"/>
+        </record>
+        <record id="V02" model="account.payment.term">
+            <field name="name">VIR 60 J</field>
+            <field name="code">V02</field>
+            <field name="line_ids" eval="[(5, 0), (0, 0, {'value': 'balance', 'value_amount': 0.0, 'sequence': 500, 'days': 60, 'option': 'day_after_invoice_date'})]"/>
+        </record>
+        <record id="V04" model="account.payment.term">
+            <field name="name">VIR à réception</field>
+            <field name="code">V04</field>
+        </record>
+        <record id="E01" model="account.payment.term">
+            <field name="name">ESPECES</field>
+            <field name="code">E01</field>
+        </record>
+        <record id="P01" model="account.payment.term">
+            <field name="name">PRELEVEMENT</field>
+            <field name="code">P01</field>
+        </record>
+    </data>
+</odoo>

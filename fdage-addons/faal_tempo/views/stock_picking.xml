@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_form_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <notebook position="before">
+                <field name="code_picking_type_value" invisible="1" />
+                <group name="left" attrs="{'invisible': [('code_picking_type_value', 'not in', ['OUT', 'LIV'])]}">
+                    <group name="expdition_left" string="Informations d'expédition">
+                        <field name="delivery_partner_id" context="{'default_is_delivery_carrier': True, 'default_is_company': True}" attrs="{'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}"/>
+                        <field name="nb_colis" attrs="{'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                    </group>
+                    <group name="expdition_right" string="Colisage">
+                        <field name="colis_1_kg" attrs="{'invisible': [('nb_colis', '&lt;', 1)], 'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                        <field name="colis_2_kg" attrs="{'invisible': [('nb_colis', '&lt;', 2)], 'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                        <field name="colis_3_kg" attrs="{'invisible': [('nb_colis', '&lt;', 3)], 'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                        <field name="colis_4_kg" attrs="{'invisible': [('nb_colis', '&lt;', 4)], 'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                        <field name="colis_5_kg" attrs="{'invisible': [('nb_colis', '&lt;', 5)], 'readonly': ['&amp;', ('state', '=', 'done'), ('is_locked', '=', True)]}" />
+                    </group>
+                </group>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
+
+
+

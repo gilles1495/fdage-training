@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_custom_format_faal_no_border" model="report.paperformat">
+            <field name="name">Faal rapport Devis / Commande</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border" model="report.paperformat">
+            <field name="name">Faal rapport Bon de Commande</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">32</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="True"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_repere_purchase" model="report.paperformat">
+            <field name="name">Faal Commande fournisseur Repères</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_no_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_with_small_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_with_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">35</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_custom_label" model="report.paperformat">
+            <field name="name">Faal Étiquettes d'expédition</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_width">210</field>
+            <field name="page_height">145</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+                id="sale.action_report_pro_forma_invoice"
+                string="Factures proforma repères"
+                model="sale.order"
+                report_type="qweb-pdf"
+                groups="sale.group_proforma_sales"
+                file="faal_tempo.faal_report_sale_order_proforma_reperes"
+                name="faal_tempo.faal_report_sale_order_proforma_reperes"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+        />
+
+        <report
+                id="purchase.action_report_purchase_order"
+                string="Commande fournisseur"
+                model="purchase.order"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border_with_small_bottom"
+                name="faal_tempo.faal_report_purchaseorder"
+                file="faal_tempo.faal_report_purchaseorder"
+                print_report_name="(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))"/>
+
+        <report
+                id="action_report_faal_purchase_repere"
+                string="Commande fournisseur repères"
+                model="purchase.order"
+                report_type="qweb-pdf"
+                name="faal_tempo.faal_report_purchaseorder_repere"
+                file="faal_tempo.faal_report_purchaseorder_repere"
+                print_report_name="(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))"/>
+
+        <report
+                id="action_report_faal_saleorder_repere"
+                string="Devis / Commande repère"
+                model="sale.order"
+                report_type="qweb-pdf"
+                file="faal_tempo.faal_sale_order_report_repere"
+                name="faal_tempo.faal_sale_order_report_repere"
+                print_report_name="(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))" />
+
+        <report
+                id="action_report_faal_saleorder"
+                string="Devis / Commande"
+                model="sale.order"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border_with_small_bottom"
+                file="faal_tempo.faal_sale_order_report_template"
+                name="faal_tempo.faal_sale_order_report_template"
+                print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' % (object.name)"
+        />
+
+        <report
+                id="action_report_faal_saleorder_esat"
+                string="Devis / Commande ESAT"
+                model="sale.order"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border_with_small_bottom"
+                file="faal_tempo.faal_sale_order_esat_report_template"
+                name="faal_tempo.faal_sale_order_esat_report_template"
+                print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' % (object.name)"
+        />
+
+        <report
+                string="Bon de Livraison"
+                id="stock.action_report_delivery"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border"
+                name="faal_tempo.report_faal_deliveryslip"
+                file="faal_tempo.report_faal_deliveryslip"
+                print_report_name="'Bon de livraison - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+        <report
+                string="Bon de Livraison repère"
+                id="stock.action_report_delivery_repere"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                name="faal_tempo.report_faal_repere_deliveryslip"
+                file="faal_tempo.report_faal_repere_deliveryslip"
+                print_report_name="'Bon de livraison - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+        <report
+                string="Bon de préparation"
+                id="faal_tempo_bon_de_livraison"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border"
+                name="faal_tempo.faal_picking_document"
+                file="faal_tempo.faal_picking_document"
+                print_report_name="'Bon de préparation - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+        <report
+                string="Bon de préparation repère"
+                id="faal_tempo_bon_de_livraison_repere"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border"
+                name="faal_tempo.faal_picking_repere_document"
+                file="faal_tempo.faal_picking_repere_document"
+                print_report_name="'Bon de préparation - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+
+        <report
+                string="Étiquettes d'expédition"
+                id="faal_tempo_bon_dexpedition"
+                model="stock.picking"
+                report_type="qweb-pdf"
+                paperformat="paperformat_custom_format_A4_no_border"
+                name="faal_tempo.faal_expedition_ticket_document"
+                file="faal_tempo.faal_expedition_ticket_document"
+                print_report_name="'Étiquettes d\'expédition'"
+        />
+
+        <report
+                string="Factures"
+                id="account.account_invoices"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="faal_tempo.faal_report_invoice_with_payments"
+                file="faal_tempo.faal_report_invoice_with_payments"
+                paperformat="paperformat_custom_format_A4_no_border_with_bottom"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+        />
+
+        <report
+                string="Factures ESAT"
+                id="account.account_invoices_esat"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="faal_tempo.faal_report_esat_invoice_with_payments"
+                file="faal_tempo.faal_report_esat_invoice_with_payments"
+                paperformat="paperformat_custom_format_A4_no_border_with_bottom"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+        />
+
+        <report
+                string="Factures repères"
+                id="account.account_invoices_repere"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="faal_tempo.faal_report_invoice_repere_with_payments"
+                file="faal_tempo.faal_report_invoice_repere_with_payments"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+        />
+
+        <report
+                string="Factures proforma repères"
+                id="account.account_invoices_repere_proformat"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="faal_tempo.faal_report_invoice_repere_no_payments"
+                file="faal_tempo.faal_report_invoice_repere_no_payments"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+        />
+
+        <report
+                id="BL_file_export"
+                model="stock.picking"
+                string="Fichier DPD"
+                name="faal_tempo.report_dpd_file_content"
+                file="faal_tempo.report_dpd_file_content"
+                report_type="qweb-text"
+                print_report_name="(object._get_report_filename_pdp())"
+        />
+
+        <report
+                string="Contrat de fourniture"
+                id="doeth_generation_report"
+                model="report.doeth"
+                name="faal_tempo.report_doeth"
+                file="faal_tempo.report_doeth"
+                paperformat="paperformat_custom_format_A4_no_border"
+                menu="False"
+                report_type="qweb-pdf"
+                print_report_name="'DOETH'"
+        />
+
+        <record id="doeth_generation_action" model="ir.actions.server">
+            <field name="name">Générer la DOETH</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list,tree,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_generate_doeth()</field>
+        </record>
+    </data>
+</odoo>

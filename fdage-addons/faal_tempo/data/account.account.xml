@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="01" model="account.account">
+            <field name="name">FOURNISSEURS</field>
+            <field name="code">40130000</field>
+            <field name="user_type_id" ref="account.data_account_type_payable"/>
+            <field name="reconcile">True</field>
+        </record>
+        <record id="02" model="account.account">
+            <field name="name">CLIENTS</field>
+            <field name="code">41100000</field>
+            <field name="user_type_id" ref="account.data_account_type_receivable" />
+            <field name="reconcile">True</field>
+        </record>
+        <record id="03" model="account.account">
+            <field name="name">CLIENTS</field>
+            <field name="code">41110000</field>
+            <field name="user_type_id" ref="account.data_account_type_receivable" />
+            <field name="reconcile">True</field>
+        </record>
+        <record id="04" model="account.account">
+            <field name="name">CLIENTS</field>
+            <field name="code">41120000</field>
+            <field name="user_type_id" ref="account.data_account_type_receivable" />
+            <field name="reconcile">True</field>
+        </record>
+        <record id="income_01" model="account.account">
+            <field name="name">VENTE BROSSERIE</field>
+            <field name="code">70100000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_02" model="account.account">
+            <field name="name">VENTES ESAT</field>
+            <field name="code">70120000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_03" model="account.account">
+            <field name="name">VENTE OBJETS PERSONNALISBLES</field>
+            <field name="code">70121000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_04" model="account.account">
+            <field name="name">VENTE COUTURE</field>
+            <field name="code">70151000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_05" model="account.account">
+            <field name="name">VENTE TEXTILE BIO</field>
+            <field name="code">70151200</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_06" model="account.account">
+            <field name="name">VENTE SACS POUBELLES</field>
+            <field name="code">70161000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_07" model="account.account">
+            <field name="name">VENTE PAPETERIE</field>
+            <field name="code">70171000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_08" model="account.account">
+            <field name="name">VENTE ECOLOGIQUE</field>
+            <field name="code">70172000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_09" model="account.account">
+            <field name="name">VENTE BOUTIQUE CADEAUX</field>
+            <field name="code">70174000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_10" model="account.account">
+            <field name="name">VENTE HYGIENE</field>
+            <field name="code">70191000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_11" model="account.account">
+            <field name="name">VENTE NOUVEAUX METIERS</field>
+            <field name="code">70192000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_12" model="account.account">
+            <field name="name">VENTE DIVERSE</field>
+            <field name="code">70194000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_13" model="account.account">
+            <field name="name">VENTE ARGOS-SERVICES</field>
+            <field name="code">70740000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+         <record id="income_14" model="account.account">
+            <field name="name">VENTE CHAISERIE MAG</field>
+            <field name="code">70130000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+         <record id="income_15" model="account.account">
+            <field name="name">VALEUR ELEMENTS ACTIF CEDES</field>
+            <field name="code">77520000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_16" model="account.account">
+            <field name="name">LOCATIONS DIVERSES</field>
+            <field name="code">70830000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_17" model="account.account">
+            <field name="name">MISE A DISPOSITION DE PERSONNEL</field>
+            <field name="code">70840000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_18" model="account.account">
+            <field name="name">PORTS VENTES VRP</field>
+            <field name="code">70850000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_19" model="account.account">
+            <field name="name">TRANSFERT DE CHARGES EXPLOITATION</field>
+            <field name="code">79100000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_20" model="account.account">
+            <field name="name">REVENTE MAG</field>
+            <field name="code">70710000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+        <record id="income_21" model="account.account">
+            <field name="name">SOUS TRAITANCE</field>
+            <field name="code">70181000</field>
+            <field name="user_type_id" ref="account.data_account_type_revenue" />
+        </record>
+
+
+        <record id="expense_01" model="account.account">
+            <field name="name">ACHAT MP BROSSERIE</field>
+            <field name="code">60110000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_02" model="account.account">
+            <field name="name">ACHAT MP CANNAGE</field>
+            <field name="code">60120000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_03" model="account.account">
+            <field name="name">ACHAT OBJETS PERSONNALISABLES</field>
+            <field name="code">60121000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_04" model="account.account">
+            <field name="name">ACHAT MP COUTURE</field>
+            <field name="code">60150000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_05" model="account.account">
+            <field name="name">ACHAT TEXTILE BIO</field>
+            <field name="code">60150200</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_06" model="account.account">
+            <field name="name">ACHAT MP PLASTIC SAC POUBELLE</field>
+            <field name="code">60160000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_07" model="account.account">
+            <field name="name">ACHAT MP PAPETERIE</field>
+            <field name="code">60170000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_08" model="account.account">
+            <field name="name">ACHAT MP PRODUITS HYGIENES</field>
+            <field name="code">60190000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_09" model="account.account">
+            <field name="name">ACHAT MP PROD HYG CEE</field>
+            <field name="code">60190100</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_10" model="account.account">
+            <field name="name">ACHAT MP COFRET</field>
+            <field name="code">60192000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_11" model="account.account">
+            <field name="name">ACHATS MP DIVERS</field>
+            <field name="code">60194100</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_12" model="account.account">
+            <field name="name">ACH EMB PRODUCT. ATELIERS</field>
+            <field name="code">60261000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_13" model="account.account">
+            <field name="name">ACHATS REPERES</field>
+            <field name="code">60740000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_14" model="account.account">
+            <field name="name">FOUR ADMINISTRATIVES</field>
+            <field name="code">60640000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_15" model="account.account">
+            <field name="name">EQUIPEMENT INFORMATIQUE ET TELEPHONE</field>
+            <field name="code">60631000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_16" model="account.account">
+            <field name="name">ACHATS REPERES</field>
+            <field name="code">61565000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_17" model="account.account">
+            <field name="name">FOURN ENTRETIEN PETIT EQUIPEMENT</field>
+            <field name="code">60630000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_18" model="account.account">
+            <field name="name">PORT</field>
+            <field name="code">60850000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+        <record id="expense_19" model="account.account">
+            <field name="name">ACHATS</field>
+            <field name="code">60710000</field>
+            <field name="user_type_id" ref="account.data_account_type_expenses" />
+        </record>
+
+    </data>
+</odoo>
