@@ -1,0 +1,4 @@
+[submodule "oca-addons/account-analytic"]
+	path = oca-addons/account-analytic
+	url = https://github.com/OCA/account-analytic.git
+	branch = 14.0
