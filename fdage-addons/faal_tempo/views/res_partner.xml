@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_view_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="sale.res_partner_view_form_property_inherit"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="ref_is_mandatory" attrs="{'invisible': [('company_type', '!=', 'company')]}" />
+            </field>
+            <field name="ref" position="after">
+                <field name="ref_aux" />
+            </field>
+            <field name="property_payment_term_id" position="after">
+                <field name="binder_id" />
+            </field>
+            <field name="binder_id" position="after">
+                <field name="etat_risque" />
+                <field name="rank_user_vallibre_one" />
+                <field name="rank_user_vallibre_two" />
+                <field name="etablishement_id" />
+            </field>
+            <group name="misc" position="after">
+                <group name="settings" string="Configuration" groups="base.group_erp_manager">
+                    <field name="is_delivery_carrier"/>
+                    <field name="delivery_carrier_edi" attrs="{'invisible': [('is_delivery_carrier', '=', False)]}"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="etablishement_01" model="etablishements">
+            <field name="name">Vente terrain</field>
+            <field name="code">001</field>
+        </record>
+         <record id="etablishement_02" model="etablishements">
+            <field name="name">Vente téléphonique</field>
+            <field name="code">002</field>
+        </record>
+         <record id="etablishement_03" model="etablishements">
+            <field name="name">Vente diverse</field>
+            <field name="code">006</field>
+        </record>
+         <record id="etablishement_04" model="etablishements">
+            <field name="name">Repères</field>
+            <field name="code">005</field>
+        </record>
+        <record id="etablishement_05" model="etablishements">
+            <field name="name">Esat commercial</field>
+            <field name="code">008</field>
+        </record>
+    </data>
+</odoo>

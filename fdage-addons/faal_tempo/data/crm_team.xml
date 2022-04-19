@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="crm_sale_1" model="crm.team">
+            <field name="name">Vente terrain</field>
+            <field name="code">001</field>
+            <field name="establishment_id" ref="etablishement_01"/>
+        </record>
+         <record id="crm_sale_2" model="crm.team">
+            <field name="name">Vente tél. Nord</field>
+            <field name="code">002</field>
+            <field name="establishment_id" ref="etablishement_02"/>
+        </record>
+         <record id="crm_sale_3" model="crm.team">
+            <field name="name">Vente tél. Sud</field>
+            <field name="code">003</field>
+            <field name="establishment_id" ref="etablishement_02"/>
+        </record>
+         <record id="crm_sale_4" model="crm.team">
+            <field name="name">Vente tél. Est</field>
+            <field name="code">004</field>
+            <field name="establishment_id" ref="etablishement_02"/>
+        </record>
+         <record id="crm_sale_5" model="crm.team">
+            <field name="name">Repères</field>
+            <field name="code">005</field>
+            <field name="establishment_id" ref="etablishement_04"/>
+        </record>
+        <record id="crm_sale_6" model="crm.team">
+            <field name="name">ESAT</field>
+            <field name="code">008</field>
+            <field name="establishment_id" ref="etablishement_05"/>
+        </record>
+         <record id="crm_sale_7" model="crm.team">
+            <field name="name">Vente diverse</field>
+            <field name="code">006</field>
+            <field name="establishment_id" ref="etablishement_03"/>
+        </record>
+    </data>
+</odoo>

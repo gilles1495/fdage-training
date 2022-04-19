@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="faal_picking_repere_document">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="font-size: 25px !important">
+                    <div class="row">
+                        <div class="col-12">
+                            <img t-att-src="'/faal_tempo/static/img/header_repere.png'" style="margin-left:-15px; margin-bottom:10px;" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 style="font-size: 30px !important"><b>Préparation N° <t t-esc="o.name" /></b></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Code Client :</span> <span style="font-size: 30px !important"><b>
+                            <t t-if="o.partner_id.parent_id">
+                                <t t-esc="o.partner_id.parent_id.ref" />
+                            </t>
+                            <t t-else="">
+                                <t t-esc="o.partner_id.ref" />
+                            </t>
+                        </b>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Représentant :</span> <span style="font-size: 30px !important">
+                            <b>
+                                <t t-esc="o.sale_id.user_id.partner_id.name" />
+                            </b>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Date de livraison :</span> <span style="font-size: 30px !important"><b><span t-field="o.scheduled_date"  t-options='{"widget": "date"}' /></b></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Réf. Commande :</span> <span style="font-size: 30px !important"><b><span t-field="o.origin" /></b></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Livraison au :</span> <span style="font-size: 30px !important"><b><span t-field="o.partner_id.zip" /> <span t-field="o.partner_id.city" /></b></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span style="font-size: 20px !important">Commande client n° <span t-field="o.origin" /> du <span t-field="o.sale_id.date_order"  t-options='{"widget": "date"}' /> <t t-esc="o.sale_id.ref_swing_id" /></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <table class="table table-sm" t-if="o.move_line_ids and o.move_ids_without_package">
+                        <t t-set="has_barcode" t-value="any([move_ids_without_package.product_id and move_ids_without_package.product_id.sudo().barcode or move_ids_without_package.package_id for move_ids_without_package in o.move_line_ids])"/>
+                        <t t-set="has_serial_number" t-value="o.move_line_ids.filtered(lambda ml: ml.lot_id or ml.lot_name)" groups="stock.group_production_lot"/>
+                        <thead>
+                            <tr>
+                                <th name="th_ref" class="text-center" style="background-color:#d1dadf; border-right:5px white solid;">Référence</th>
+                                <th name="th_description" class="text-center" style="background-color:#d1dadf; border-right:5px white solid;">Désignation</th>
+                                <th name="th_quantity" class="text-center" style="background-color:#d1dadf;">Quantité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.get_picking_report_lines()" t-as="line">
+                                <tr>
+                                    <td name="td_ref" style="font-size: 35px !important;">
+                                        <b><t t-esc="line['ref']"/></b>
+                                    </td>
+                                    <td name="td_description" style="font-size: 35px !important;">
+                                        <b><t t-esc="line['name']"/></b>
+                                    </td>
+                                    <td name="td_quantity" class="text-right" style="font-size: 35px !important;">
+                                        <b><t t-if="line['qty'].is_integer()">
+                                            <t t-esc="int(line['qty'])"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="line['qty']"/>
+                                        </t></b>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm" t-if="o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done']">
+                        <thead>
+                            <tr>
+                                <th name="th_package">Package</th>
+                                <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">From</th>
+                                <th name="th_pki_from" t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)" t-as="package">
+                                <t t-set="package" t-value="package.with_context(picking_id=o.id)" />
+                                <td name="td_pk_barcode">
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', package.package_id.name, 600, 100)" style="width:300px;height:50px; margin-left: -50px;" alt="Barcode"/><br/>
+                                </td>
+                                <td t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">
+                                    <span t-field="package.location_id"/>
+                                </td>
+                                <td t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">
+                                    <span t-field="package.location_dest_id"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-set="no_reserved_product" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty != x.reserved_availability and x.move_line_ids and x.state!='done')"/>
+                    <p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product"><i class="fa fa-exclamation-triangle" />
+                        All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                    </p>
+                    <p t-field="o.note"/>
+                    <div class="footer row" style="font-size: 30px">
+                        <div class="col-6">
+                            <b>N° <t t-esc="o.name"/></b>
+                        </div>
+                        <div class="col-6 text-right">
+                            <b>Page <span class="page"/> / <span class="topage"/></b>
+                        </div>
+                    </div>
+                </div>
+                <p style="page-break-after: always;"/>
+            </t>
+        </t>
+    </template>
+</odoo>

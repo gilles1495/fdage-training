@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="product_categ_main_01" model="product.category">
+            <field name="name">Inedits</field>
+            <field name="code">0</field>
+        </record>
+        <record id="product_categ_main_02" model="product.category">
+            <field name="name">Brosserie</field>
+            <field name="code">1</field>
+            <field name="property_account_income_categ_id" ref="income_01" />
+            <field name="property_account_expense_categ_id" ref="expense_01" />
+        </record>
+        <record id="product_categ_main_03" model="product.category">
+            <field name="name">Divers</field>
+            <field name="code">10</field>
+        </record>
+        <record id="product_categ_main_04" model="product.category">
+            <field name="name">ESAT</field>
+            <field name="code">100</field>
+            <field name="property_account_income_categ_id" ref="income_02" />
+            <field name="property_account_expense_categ_id"></field>
+        </record>
+        <record id="product_categ_main_05" model="product.category">
+            <field name="name">ARGOS-Services</field>
+            <field name="code">12</field>
+            <field name="property_account_income_categ_id" ref="income_13" />
+            <field name="property_account_expense_categ_id" ref="expense_13" />
+        </record>
+        <record id="product_categ_main_06" model="product.category">
+            <field name="name">Nouveaux métiers</field>
+            <field name="code">14</field>
+            <field name="property_account_income_categ_id" ref="income_11" />
+            <field name="property_account_expense_categ_id" ref="expense_11" />
+        </record>
+        <record id="product_categ_main_07" model="product.category">
+            <field name="name">Ecologique</field>
+            <field name="code">15</field>
+            <field name="property_account_income_categ_id" ref="income_08" />
+            <field name="property_account_expense_categ_id" ref="expense_09" />
+        </record>
+        <record id="product_categ_main_08" model="product.category">
+            <field name="name">Idées cadeaux</field>
+            <field name="code">16</field>
+            <field name="property_account_income_categ_id" ref="income_09" />
+            <field name="property_account_expense_categ_id"></field>
+        </record>
+        <record id="product_categ_main_09" model="product.category">
+            <field name="name">Offre du moment</field>
+            <field name="code">17</field>
+            <field name="property_account_income_categ_id" ref="income_10" />
+            <field name="property_account_expense_categ_id" ref="expense_08" />
+        </record>
+        <record id="product_categ_main_10" model="product.category">
+            <field name="name">Couture</field>
+            <field name="code">4</field>
+            <field name="property_account_income_categ_id" ref="income_04" />
+            <field name="property_account_expense_categ_id" ref="expense_04" />
+        </record>
+        <record id="product_categ_main_11" model="product.category">
+            <field name="name">Sacs poubelle</field>
+            <field name="code">5</field>
+            <field name="property_account_income_categ_id" ref="income_06" />
+            <field name="property_account_expense_categ_id" ref="expense_06" />
+        </record>
+        <record id="product_categ_main_12" model="product.category">
+            <field name="name">Papeterie</field>
+            <field name="code">7</field>
+            <field name="property_account_income_categ_id" ref="income_07" />
+            <field name="property_account_expense_categ_id" ref="expense_07" />
+        </record>
+        <record id="product_categ_main_13" model="product.category">
+            <field name="name">Textile bio</field>
+            <field name="code">80</field>
+            <field name="property_account_income_categ_id" ref="income_05" />
+            <field name="property_account_expense_categ_id" ref="expense_05" />
+        </record>
+        <record id="product_categ_main_14" model="product.category">
+            <field name="name">Objets personnalisables</field>
+            <field name="code">81</field>
+            <field name="property_account_income_categ_id" ref="income_03" />
+            <field name="property_account_expense_categ_id" ref="expense_03" />
+        </record>
+        <record id="product_categ_main_15" model="product.category">
+            <field name="name">Hygiène</field>
+            <field name="code">9</field>
+            <field name="property_account_income_categ_id" ref="income_10" />
+            <field name="property_account_expense_categ_id" ref="expense_08" />
+        </record>
+        <record id="product_categ_main_16" model="product.category">
+            <field name="name">Accessibilité</field>
+            <field name="code">90</field>
+            <field name="property_account_income_categ_id" ref="income_13" />
+            <field name="property_account_expense_categ_id" ref="expense_13" />
+        </record>
+        <record id="product_categ_main_17" model="product.category">
+            <field name="name">Menuiserie</field>
+            <field name="code">91</field>
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id"></field>
+        </record>
+        <record id="product_categ_main_18" model="product.category">
+            <field name="name">Fin de série</field>
+            <field name="code">99</field>
+            <field name="property_account_income_categ_id" ref="income_04" />
+            <field name="property_account_expense_categ_id" ref="expense_04" />
+        </record>
+        <record id="product_categ_main_19" model="product.category">
+            <field name="name">Matières premières</field>
+            <field name="code">MP</field>
+        </record>
+
+        <record id="product_categ_sub_01" model="product.category">
+            <field name="name">Brosserie</field>
+            <field name="code">SBR</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_01" />
+            <field name="property_account_expense_categ_id" ref="expense_01" />
+        </record>
+        <record id="product_categ_sub_02" model="product.category">
+            <field name="name">Divers</field>
+            <field name="code">DIV</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_12" />
+            <field name="property_account_expense_categ_id" ref="expense_11" />
+        </record>
+        <record id="product_categ_sub_03" model="product.category">
+            <field name="name">Hygiène</field>
+            <field name="code">SHY</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_10" />
+            <field name="property_account_expense_categ_id" ref="expense_08" />
+        </record>
+        <record id="product_categ_sub_04" model="product.category">
+            <field name="name">Nouveaux Métiers</field>
+            <field name="code">SNO</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_11" />
+            <field name="property_account_expense_categ_id" ref="expense_11" />
+        </record>
+        <record id="product_categ_sub_05" model="product.category">
+            <field name="name">Papeterie</field>
+            <field name="code">SPA</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_07" />
+            <field name="property_account_expense_categ_id" ref="expense_07" />
+        </record>
+        <record id="product_categ_sub_06" model="product.category">
+            <field name="name">Sacs poubelle</field>
+            <field name="code">SSA</field>
+            <field name="parent_id" ref="product_categ_main_01" />
+            <field name="property_account_income_categ_id" ref="income_06" />
+            <field name="property_account_expense_categ_id" ref="expense_06" />
+        </record>
+<!--        <record id="product_categ_sub_07" model="product.category">-->
+<!--            <field name="name">SPE</field>-->
+<!--            <field name="code">SPE</field>-->
+<!--            <field name="parent_id" ref="product_categ_main_05" />-->
+<!--            <field name="property_account_income_categ_id" ref="income_13" />-->
+<!--            <field name="property_account_expense_categ_id" ref="expense_13" />-->
+<!--        </record>-->
+        <record id="product_categ_sub_08" model="product.category">
+            <field name="name">Chaiserie</field>
+            <field name="code">MPA</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_02" />
+        </record>
+        <record id="product_categ_sub_09" model="product.category">
+            <field name="name">Brosserie</field>
+            <field name="code">MPB</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_01" />
+        </record>
+        <record id="product_categ_sub_10" model="product.category">
+            <field name="name">Couture</field>
+            <field name="code">MPC</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_04" />
+        </record>
+        <record id="product_categ_sub_11" model="product.category">
+            <field name="name">Textile bio</field>
+            <field name="code">MPT</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_05" />
+        </record>
+        <record id="product_categ_sub_12" model="product.category">
+            <field name="name">Divers</field>
+            <field name="code">MPD</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id"></field>
+        </record>
+        <record id="product_categ_sub_13" model="product.category">
+            <field name="name">Hygiène</field>
+            <field name="code">MPH</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_08" />
+        </record>
+        <record id="product_categ_sub_14" model="product.category">
+            <field name="name">Coffrets</field>
+            <field name="code">MPO</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_10" />
+        </record>
+        <record id="product_categ_sub_15" model="product.category">
+            <field name="name">Papeterie</field>
+            <field name="code">MPP</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_07" />
+        </record>
+        <record id="product_categ_sub_16" model="product.category">
+            <field name="name">Sacs poubelle</field>
+            <field name="code">MPS</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_06" />
+        </record>
+        <record id="product_categ_sub_17" model="product.category">
+            <field name="name">Emballage</field>
+            <field name="code">MPE</field>
+            <field name="parent_id" ref="product_categ_main_19" />
+            <field name="property_account_income_categ_id"></field>
+            <field name="property_account_expense_categ_id" ref="expense_12" />
+        </record>
+
+    </data>
+</odoo>

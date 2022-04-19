@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <act_window name="Partial Force Assign" id="wk_partial_force_assign"
+        res_model="partial.force.assign"
+        view_mode="form" target="new"/>
+
+    <record id="view_partial_force_assign_form" model="ir.ui.view">
+        <field name="name">Partial Force Assign</field>
+        <field name="model">partial.force.assign</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="picking_id" invisible="1" force_save="1"/>
+                <group>
+                    <field name="force_assign_moves" nolabel="1">
+                        <tree editable="top" create="0" delete="0">
+                            <field name="product_id"  options="{'no_create': True, 'no_open': True}" force_save="1"/>
+                            <field name="product_uom_qty"/>
+                            <field name="reserved_availability"/>
+                            <field name="quantity_done"/>
+                            <field name="move_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button name="wk_partial_force_assign" string="Validate" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

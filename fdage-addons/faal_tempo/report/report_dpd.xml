@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- LAISSER LA LIGNE SUIVANTE SUR UNE SEULE LIGNE ET SANS ESPACE ENTRE LES BALISES -->
+        <template id="report_dpd_file_content"><t t-raw="docs._get_content_pdp()" /></template>
+    </data>
+</odoo>

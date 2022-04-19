@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="faal_expedition_ticket_document">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="row" style="padding-top:7mm;">
+                        <div class="col-6" style="height:4.15cm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="height:41.5mm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px;">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" style="padding-top:2mm;">
+                        <div class="col-6" style="height:41.5mm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="height:41.5mm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px;">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" style="padding-top:2mm;">
+                        <div class="col-6" style="height:41.5mm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="height:41.5mm;">
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="col-12">
+                                    EXP : FED. AVEUGLES GRAND EST - POLE TRAVAIL<br />
+                                    <span style="margin-right:20px;">27 Rue de la première armée</span><span>67065 STRASBOURG</span>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" style="padding-left:10px; padding-right:10px;">
+                                <div class="col-12" style="border-bottom: 1px solid black;" />
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-7">
+                                    <t t-esc="o.get_partner_part('name')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('street')" />
+                                    <br />
+                                    <t t-esc="o.get_partner_part('zip')" />
+                                </div>
+                                <div class="col-5" style="font-size:14px;">
+                                    Ref : <t t-esc="o.get_ref_expedition()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

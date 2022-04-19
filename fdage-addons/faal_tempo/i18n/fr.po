@@ -1,0 +1,13 @@
+#. module: partner_credit_limit
+#: model:ir.model.fields,field_description:partner_credit_limit.field_res_partner__over_credit
+#: model:ir.model.fields,field_description:partner_credit_limit.field_res_users__over_credit
+msgid "Allow Over Credit?"
+msgstr "Autoriser dépassement crédit ?"
+
+#. module: l10n_fr_siret
+#: model:ir.model.fields,field_description:l10n_fr_siret.field_res_company__siret
+#: model:ir.model.fields,field_description:l10n_fr_siret.field_res_partner__siret
+#: model:ir.model.fields,field_description:l10n_fr_siret.field_res_users__siret
+#, fuzzy
+msgid "SIRET"
+msgstr "SIRET"

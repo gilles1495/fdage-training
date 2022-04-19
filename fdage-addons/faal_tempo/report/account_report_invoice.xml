@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="faal_tempo.faal_external_layout_standard">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-12">
+                        <img t-att-src="'/faal_tempo/static/img/header_commande.png'" style="height:200px; margin-left:-25px;"/>
+                    </div>
+                </div>
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="col-12 last-page" style="font-size:11px;">
+                    Le défaut de paiement d'une facture à sa date d'échéance permet au vendeur, soit de recourir à l'exécution forcée et exiger une indemnité égale à plus de 8% du montant de la commande à titre de clause
+                    pénale, soit de considérer la commande nulle et non avenue et exiger un montant équivalent à 20% du prix de la commande à titre d'indemnité de résiliation. Pour tous professionnels, le règlement des
+                    sommes dues postérieurement à la date d'éligibilité figurant sur la facture majorera de plein droit le montant de celle-ci d'une indemnité forfaitaire de 40€ prévue à l'article L441-6 alinéa 12 du code du
+                    commerce, et dont le montant est fixé par décret n°2012-1115 du 2 octobre 2012 (article D441-5 du code des procédures civiles d'exécution). En cas de modification règlementaire du montant de cette
+                    indemnité forfaitaire, le nouveau montant sera de plein droit substitué à celui figurant dans les présentes conditions générales de vente ou de conditions de règlement. L'application de plein droit de cette
+                    indemnisation ne fait pas obstacle à l'application d'une indemnité complémentaire de la créance sur justification, conformément au texte susvisé, a dû concurrence de l'intégralité des sommes qui auront
+                    été exposées, qu'elles qu'en soit la nature, pour le recouvrement de créance. Nos ventes sont effectuées comptant, net et sans escompte.
+                </div>
+            </div>
+        </template>
+
+
+        <template id="faal_report_invoice_with_payments">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="faal_tempo.faal_report_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+        <template id="faal_report_document">
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="faal_tempo.faal_external_layout_standard">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <div class="page" >
+                    <div class="row" style="margin-left:-5px;padding-left:10px; padding-right:10px;">
+                        <div class="col-8" style="padding-left:5px">
+                            <div class="row">
+                                <div class="col-12">
+                                    <t t-if="o.move_type == 'out_refund'">
+                                        <h2 style="color:black;"><b>Avoir client N°<br  /><t t-esc="o.name" /></b></h2>
+                                    </t>
+                                    <t t-else="">
+                                        <h2 style="color:black;"><b>Facture client N°<br  /><t t-esc="o.name" /></b></h2>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <b>Date :</b> <span t-field="o.invoice_date"  t-options='{"widget": "date"}' />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <t t-if="o.partner_id">
+                                        <b>Code client :</b>
+                                        <t t-if="o.partner_id.parent_id">
+                                            <t t-esc="o.partner_id.parent_id.ref" />
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="o.partner_id.ref" />
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <t t-if="o.partner_id">
+                                        <b>Ref client :</b>
+                                        <t t-esc="o.ref" />
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="border:1px solid #ece9e5; margin-left:5px;">
+                            <div class="text-center"><b>Adresse de facturation</b></div>
+                            <div>
+                                <t t-esc="o.partner_id.name" /><br /><br />
+                                <t t-esc="o.partner_id.street" /><br />
+                                <t t-esc="o.partner_id.street2" /><br /><br />
+                                <t t-esc="o.partner_id.zip" /> - <t t-esc="o.partner_id.city" /><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:5px;padding-left:10px; padding-right:10px;">
+                        <div class="col-12" style="border:1px solid #ece9e5; padding-top:10px;padding-bottom:10px">
+                            <div class="row">
+                                <div class="col-12">Représentant : <span t-field="o.user_id.name" /> - Téléphone : <span t-field="o.user_id.partner_id.phone" /> - Mail : <span t-field="o.user_id.partner_id.email" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="margin-top:5px;margin-bottom:5px;">
+                            <t t-if="o.invoice_origin">
+                                <span>Livraison client n° <span t-esc="o.get_livraison_info()" /></span>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="margin-bottom:5px;">
+                            <t t-if="o.invoice_origin">
+                                <span>Commande client n° <span t-esc="o.get_invoice_info()" /></span>
+                            </t>
+                        </div>
+                    </div>
+                    <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+                    <table class="table table-sm o_main_table" name="invoice_line_table">
+                        <thead>
+                            <tr>
+                                <th name="th_ref" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Référence</th>
+                                <th name="th_description" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Désignation</th>
+                                <th name="th_quantity" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Quantité</th>
+                                <th name="th_pu_amount_ht" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">P.U. H.T.</th>
+                                <th name="th_discount" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Remise</th>
+                                <th name="th_amount_ht" class="text-center" style="color:black;background-color:#d1dadf;">Montant H.T.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="current_subtotal_hors_fp" t-value="0"/>
+                            <t t-set="current_subtotal_fp" t-value="0"/>
+                            <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+                            <t t-if="o.text_option and o.amount_option">
+                                <tr>
+                                    <td colspan="5"><span t-field="o.text_option" /></td>
+                                    <td class="text-right"><span t-field="o.amount_option" t-options="{'widget': 'float', 'precision': 2}" /> €</td>
+                                </tr>
+                            </t>
+                            <t t-foreach="lines" t-as="line">
+                                <t t-if="'Frais de port' not in line.name">
+                                    <t t-set="current_subtotal_hors_fp" t-value="current_subtotal_hors_fp + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                </t>
+                                <t t-if="'Frais de port' in line.name">
+                                    <t t-set="current_subtotal_fp" t-value="current_subtotal_fp + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                </t>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                        <t t-if="not line.dont_show_in_export and 'Frais de port' not in line.name">
+                                            <td name="account_invoice_ref"><span t-field="line.product_id.code" t-options="{'widget': 'text'}"/></td>
+                                            <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                            <td class="text-right">
+                                                <span t-field="line.quantity" t-options='{"widget": "float", "precision": 0}'/>
+                                            </td>
+                                            <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                                <span class="text-nowrap" t-field="line.price_unit" t-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                            <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                                <t t-if="line.discount > 0">
+                                                    <span class="text-nowrap" t-field="line.discount"/> %
+                                                </t>
+                                            </td>
+                                            <td class="text-right o_price_total">
+                                                <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                                <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                            </td>
+                                        </t>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-6 offset-6" style="border:1px solid #ece9e5;">
+                            <div class="row" style="page-break-inside: avoid;">
+                                <div class="col-8">
+                                    <b>Total</b>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <t t-esc="current_subtotal_hors_fp" t-options="{'widget': 'float', 'precision': 2}" /> €
+                                </div>
+                            </div>
+                            <div class="row" style="page-break-inside: avoid;">
+                                <div class="col-8">
+                                    <b>Participation aux frais de port</b>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <t t-esc="current_subtotal_fp" t-options="{'widget': 'float', 'precision': 2}" /> €
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-4 offset-8" style="border:1px solid #ece9e5;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Total HT</b>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span t-field="o.amount_untaxed"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>TVA (20%)</b>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span t-field="o.amount_tax"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Total TTC</b>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="text-nowrap" t-field="o.amount_total"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:5px;page-break-inside: avoid;">
+                        <div class="col-7 offset-1 text-right">
+                            <t t-if="o.move_type != 'out_refund'">
+                            Lors de votre réglement, merci de préciser la référence <span t-field="o.payment_reference" />
+                            au dos de votre chèque ou lors de votre virement.
+                            </t>
+                        </div>
+                        <div class="col-4" style="background-color:#d1dadf; padding-top:10px;">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h5><b>NET A PAYER</b></h5>
+                                </div>
+                                <div class="col-5 text-right">
+                                    <span t-field="o.amount_total"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left:10px; padding-right:10px; font-size:14px !important; margin-top:10px; page-break-inside: avoid;">
+                        <div class="col-5" style="border:1px solid #ece9e5; margin-right:10px;">
+                            <p class="text-center"><b>Détails nous concernant</b></p>
+                            <p style="margin-left:-10px;">Fédération des Aveugles Alsace Lorraine Grand Est<br />
+                                Pôle travail adapté et protégé<br />
+                                Siège : <b>27, rue de la 1ère Armée - 67000 Strasbourg</b><br />
+                                Tél : <b>03 88 36 03 77</b> - Fax : <b>03 88 35 22 30</b><br />
+                                E-mail : <b>contact@aveugles-pole-travail.fr</b><br />
+                                Site internet : <b>www.aveugles-pole-travail.fr</b><br />
+                                Siret : 775 641 392 00011 - Code NAF : 8810C <br /> n° TVA : FR 15 775 641 392</p>
+                        </div>
+                        <div class="col-4" style="border:1px solid #ece9e5; margin-right:10px;">
+                            <p class="text-center"><b>Détails bancaires</b></p>
+                            <p style="margin-left:-10px;"><b>Banque : Société Générale</b><br />
+                                RIB : 30003 02365 00050014451 06<br />
+                                IBAN : FR76 3000 3023 6500 0500 1445 106<br />
+                                BIC / SWIFT : SOGEFRPP</p>
+                        </div>
+                        <div class="col-3" style="border:1px solid #ece9e5;">
+                            <t t-if="o.move_type == 'out_refund'">
+                            <p class="text-center" ><b>Détails de l'avoir</b></p>
+                            <p style="margin-left:-10px;"><b>Numéro d'avoir :</b> <br /><t t-esc="o.name" /><br />
+                                <b>Net à payer :</b> <br /><span t-field="o.amount_total"/></p>
+                            </t>
+                            <t t-else="">
+                            <p class="text-center" ><b>Détails de facturation</b></p>
+                            <p style="margin-left:-10px;"><b>Numéro de facture :</b> <br /><t t-esc="o.name" /><br />
+                                <b>Echéance de paiement :</b> <br /><span t-field="o.invoice_date_due"  t-options='{"widget": "date"}' /><br />
+                                <b>Mode de réglement :</b> <br /><span t-field="o.invoice_payment_term_id.name"/><br />
+                                <b>Net à payer :</b> <br /><span t-field="o.amount_total"/></p>
+                            </t>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

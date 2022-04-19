@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_doeth">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page" style="font-size: 25px !important">
+                    <img t-att-src="'/faal_tempo/static/img/header_doeth.png'" height="150" />
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 style="background-color:#44546a; color:white; padding-left:100px; padding-right:100px; padding-top:15px; padding-bottom:15px;">SECTEUR PRIVE / PUBLIC</h2>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 style="background-color:#ff2f92; color:white; padding:15px;">Attestation relative aux achats de fournitures, de sous-traitance ou de prestations de services auprès des entreprises adaptées</h3>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12" style="padding-left:15px; padding-right:15px; font-size:16px;">
+                            Vu les articles L. 5212-10-1, D. 5212-7 et D. 5212-22 du code du travail, <br />
+                            Vu l’article 38 de la loi no 83-634 du 13 juillet 1983 portant droits et obligations des fonctionnaires, <br />
+                            Vu le décret no 2006-501 du 3 mai 2006 modifié relatif au fonds pour l’insertion des personnes handicapées dans la fonction publique et notamment les articles 5, 6 et 6-1, <br />
+                            <br />
+                            Je soussigné, <b><t t-esc="o.get_president_name()" /></b>, représentant légal de l’Entreprise Adaptée de la Fédération des Aveugles Alsace Lorraine Grand Est ; <br />
+                            Adresse : 27 rue de la première armée 67000 Strasbourg <br />
+                            SIRET : 77564139200011 <br />
+                            CPOM : 44210002M1 <br />
+                            Téléphone : 03 88 36 03 77 <br />
+                            Courriel : contact@aveugles-grand-est.fr
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-12" style="text-align:center;">
+                            <h3><b><u>Atteste que</u></b></h3>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-3" style="font-size:16px;">
+                            <u>L’entreprise :</u>
+                        </div>
+                        <div class="col-9" style="font-size:16px;">
+                            <t t-esc="o.get_client_info('name')" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-3" style="font-size:16px;">
+                            <u>Adresse :</u>
+                        </div>
+                        <div class="col-9" style="font-size:16px;">
+                            <div>
+                                <t t-esc="o.partner_id.street" /> <br/>
+                                <t t-esc="o.partner_id.street2" /> <br t-if="o.partner_id.street2" />
+                                <t t-esc="o.partner_id.zip" /> - <t t-esc="o.partner_id.city" />
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-3" style="font-size:16px;">
+                            <u>SIRET N° :</u>
+                        </div>
+                        <div class="col-9" style="font-size:16px;">
+                            <div>
+                                <t t-esc="o.partner_id.parent_id.siret" /><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div t-attf-class="footer o_background_footer">
+                        <div class="row">
+                            <div class="col-6">
+                                27, rue de la 1ère Armée <br />
+                                CS 50035 – 67065 Strasbourg Cedex <br />
+                                Tél : 03 88 36 03 77 – Fax : 03 88 35 22 30 <br />
+                                E-Mail : contact@aveugles-grand-est.fr<br />
+                                Site web : www.aveugles-grand-est.fr
+                            </div>
+                            <div class="col-6 text-right">
+                                Association reconnue de mission d’utilité publique <br />
+                                Membre de la Fédération des Aveugles de France <br />
+                                Siret : 775 641 392 00011 – Code NAF : 8810 C <br />
+                                n° TVA : FR 15 775 641 392
+                            </div>
+                        </div>
+                    </div>
+                    <p style="page-break-before:always;"> </p>
+                    <img t-att-src="'/faal_tempo/static/img/header_doeth.png'" height="150" />
+                    <div class="row">
+                        <div class="col-12" style="padding-left:15px; padding-right:15px; font-size:16px;">
+                            Peut valoriser, en déduction de la contribution due au titre de l’obligation d’emploi des travailleurs handicapés, dans le cadre de la déclaration obligatoire d’emploi des travailleurs handicapés effectuée au titre de l’année civile <t t-esc="o.year"/>, le montant calculé de la manière suivante :
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <t t-set="amount_1" t-value="o.subtotal_without_shipping" />
+                            <t t-set="amount_2" t-value="amount_1 * 0.4" />
+                            <t t-set="amount_3" t-value="amount_1 - amount_2" />
+                            <t t-set="amount_4" t-value="amount_3 * 0.3" />
+                            <table class="table table-sm" style="font-size:16px;">
+                                <thead>
+                                    <tr style="background-color:#bfbfbf;">
+                                        <th name="th_name" style="width:50%; border:1px black solid;text-align: center;vertical-align: middle;"><strong>Intitulé</strong></th>
+                                        <th name="th_calcul" style="width:25%; border:1px black solid;text-align: center;vertical-align: middle;"><strong>Calcul</strong></th>
+                                        <th name="th_sm_total" style="width:25%; border:1px black solid;text-align: center;vertical-align: middle;"><strong>A remplir</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><u>Montant 1 :</u> montant du prix hors taxes des fournitures, travaux ou prestations effectivement réglé1 au cours de l’année (indiquer les numéros de factures associées au montant 1)</td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><b>Montant 1</b></td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle; "><t t-esc="amount_1" t-options="{'widget': 'float', 'precision': 2}" /> €</td>
+                                    </tr>
+                                    <tr style="border:1px black solid;">
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><u>Montant 2 /déductions :</u> coûts de matières premières, des produits, des matériaux, de la sous-traitance, des consommations intermédiaires et des frais de vente et de commercialisation correspondant aux montants réglés visés dans le cadre du Montant 1</td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><b>Montant 2 = Montant 1 x 40%</b></td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><t t-esc="amount_2" t-options="{'widget': 'float', 'precision': 2}" /> €</td>
+                                    </tr>
+                                    <tr style="border:1px black solid;">
+                                        <td style="border:1px black solid; text-align: center;vertical-align: middle;"><u>Montant 3 :</u> montant du coût total de la main d’œuvre</td>
+                                        <td style="border:1px black solid; text-align: center;vertical-align: middle;"><b>Montant 3 = Montant 1 – Montant 2</b></td>
+                                        <td style="border:1px black solid; text-align: center;vertical-align: middle;"><t t-esc="amount_3" t-options="{'widget': 'float', 'precision': 2}" /> €</td>
+                                    </tr>
+                                    <tr style="border:1px black solid;">
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><u>Montant 4 :</u> montant à valoriser dans le cadre de la déduction1 avant plafonnement</td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><b>Montant 4 = Montant 3 × 30%</b></td>
+                                        <td style="border:1px black solid;text-align: center;vertical-align: middle;"><t t-esc="amount_4" t-options="{'widget': 'float', 'precision': 2}" /> €</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12" style="font-size:16px; margin-bottom:50px">
+                            Cette attestation concerne les factures n° : <br />
+                            <b><t t-esc="o.invoices_names" /></b>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="font-size:16px;">
+                            Fait à Strasbourg, le <t t-esc="o.get_date()" /><br />
+                            <br />
+                            Le représentant légal,<br />
+                            <t t-esc="o.get_president_name()" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12" style="font-size:16px;">
+                            1 La facture des contrats doit être réglée avant le 31 décembre de l’année au titre de laquelle la contribution est due. <br />
+                            2 Le montant 4 correspond au montant à valoriser dans le cadre de la déduction avant plafonnement. Il revient à l’employeur d’opérer le calcul du montant déductible après application du plafond : Si le taux d’emploi direct est inférieur à 3 %, le montant à déduire est plafonné à 50 % de la contribution brute, si le taux d’emploi direct est supérieur ou égal à 3 %, le montant à déduire est plafonné à 75 % de la contribution brute.
+                        </div>
+                    </div>
+                    <div t-attf-class="footer o_background_footer">
+                        <div class="row">
+                            <div class="col-6">
+                                27, rue de la 1ère Armée <br />
+                                CS 50035 – 67065 Strasbourg Cedex <br />
+                                Tél : 03 88 36 03 77 – Fax : 03 88 35 22 30 <br />
+                                E-Mail : contact@aveugles-grand-est.fr<br />
+                                Site web : www.aveugles-grand-est.fr
+                            </div>
+                            <div class="col-6 text-right">
+                                Association reconnue de mission d’utilité publique <br />
+                                Membre de la Fédération des Aveugles de France <br />
+                                Siret : 775 641 392 00011 – Code NAF : 8810 C <br />
+                                n° TVA : FR 15 775 641 392
+                            </div>
+                        </div>
+                    </div>
+                    <p style="page-break-before:always;"> </p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

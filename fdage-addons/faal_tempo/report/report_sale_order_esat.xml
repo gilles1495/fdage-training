@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="faal_tempo.faal_external_layout_sale_order_esat">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-12">
+                    <img t-att-src="'/faal_tempo/static/img/header_esat2.jpg'" style="height:200px; margin-left:-25px;"/>
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_background_footer">
+            <img t-att-src="'/faal_tempo/static/img/hr_commande.png'" style="width:1500px;" />
+            <div class="row">
+                <div class="col-6"><b>ESAT Les Ateliers du Petit Prince</b><br />
+                    22, rue de la 1ère Armée - 67000 STRASBOURG <br/>
+                    Tél : 03 90 22 56 03<br/>
+                    E-mail : contact@esat-petit-prince.com<br/>
+                    Siret : 775 641 392 00086 - Code NAF : 8810C<br/>
+                    n° TVA : FR15 775 641 392<br/>
+                </div>
+                <div class="col-6 text-right">
+                    <br />
+                    ESAT Les Ateliers du Petit Prince est une marque <br />
+                    de la Fédération des Aveugles Alsace Lorraine Grand Est. <br />
+                    association inscrite au Registre des Associations du Tribunal d’Instance de Strasbourg  <br />
+                    Vol. III n°7 et à la chambre des métiers de Strasbourg n°775 641 392 RL 67
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="faal_sale_order_report_esat_document">
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="faal_tempo.faal_external_layout_sale_order_esat">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row" style="margin-left:-5px;padding-left:10px; padding-right:10px;margin-right:-3px;">
+                    <div class="col-4" style="padding-left:5px">
+                        <div class="text-center">
+                            <t t-if="doc.state in ['draft', 'sent']">
+                                <h2 style="color:black;"><b>DEVIS N° <br /><t t-esc="doc.name" /></b></h2>
+                            </t>
+                            <t t-if="doc.state in ['sale', 'done']">
+                                <h2 style="color:black;"><b>BON DE COMMANDE N° <br /><t t-esc="doc.name" /></b></h2>
+                            </t>
+                        </div>
+                        <br />
+                        <div>
+                            <b>Date :</b> <span t-field="doc.date_order"  t-options='{"widget": "date"}' /><br />
+                            <t t-if="doc.partner_id">
+                                <b>Code client :</b> <t t-esc="doc.partner_id.ref" />
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-4" style="border:1px solid #ece9e5;">
+                        <div class="text-center"><b>Adresse de livraison</b></div>
+                        <div>
+                            <t t-esc="doc.partner_shipping_id.name" /><br />
+                            <t t-esc="doc.partner_shipping_id.street" /><br />
+                            <t t-if="doc.partner_shipping_id.street2">
+                                <t t-esc="doc.partner_shipping_id.street2" /><br />
+                            </t>
+                            <t t-esc="doc.partner_shipping_id.zip" /> <t t-esc="doc.partner_shipping_id.city" /><br />
+                            Tel. <t t-esc="doc.partner_shipping_id.phone" /><br />
+                           <span  t-if="doc.contact_id"> Contact: <t t-esc="doc.contact_id.name" /> </span>
+                        </div>
+                    </div>
+                    <div class="col-4" style="border:1px solid #ece9e5; margin-left:5px;">
+                        <div class="text-center"><b>Adresse de facturation</b></div>
+                        <div>
+                            <t t-if="doc.partner_invoice_id">
+                                <t t-esc="doc.partner_invoice_id.name" /><br />
+                                <t t-esc="doc.partner_invoice_id.street" /><br />
+                                <t t-if="doc.partner_invoice_id.street2">
+                                    <t t-esc="doc.partner_invoice_id.street2" /><br />
+                                </t>
+                                <t t-esc="doc.partner_invoice_id.zip" /> <t t-esc="doc.partner_invoice_id.city" /><br />
+                                Tel. <t t-esc="doc.partner_invoice_id.phone" /><br />
+                                <t t-if="doc.partner_id">
+                                    Siret: <t t-esc="doc.partner_id.siret" />
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:5px;padding-left:10px; padding-right:10px;margin-left:-10px;margin-right:-5px;margin-bottom:10px;">
+                    <div class="col-12" style="border:1px solid #ece9e5; padding-top:10px;padding-bottom:10px">
+                        <div class="row">
+                            <div class="col-12">Représentant : <span t-field="doc.user_id.name" /> - Téléphone : <span t-field="doc.user_id.partner_id.phone" /> - Mail : <span t-field="doc.user_id.partner_id.email" /></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Is there a discount on at least one line? -->
+                <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
+                <table class="table table-sm o_main_table" style="margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th name="th_ref" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Référence</th>
+                            <th name="th_description" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Désignation</th>
+                            <th name="th_quantity" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Quantité</th>
+                            <th name="th_priceunit" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">PU Net</th>
+                            <th name="th_pricesubtotal" class="text-center" style="color:black;background-color:#d1dadf; border-right:5px white solid;">Montant HT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-set="current_subtotal_hors_fp" t-value="0"/>
+                        <t t-set="current_fp" t-value="0" />
+                        <t t-foreach="doc.order_line" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                            <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <t t-if="not line.display_type">
+                                    <t t-if="'Frais de port' not in line.name">
+                                        <t t-set="current_subtotal_hors_fp" t-value="current_subtotal_hors_fp + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                        <td name="td_ref"><span t-field="line.product_id.default_code"/></td>
+                                        <td name="td_description" style="width:50%;"><span t-field="line.name"/></td>
+                                        <td name="td_quantity" class="text-right">
+                                            <span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 0}'/>
+                                        </td>
+                                        <td name="td_priceunit" class="text-right">
+                                            <span t-field="line.price_reduce" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td name="td_pricesubtotal" class="text-right">
+                                            <span t-field="line.price_subtotal" t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </t>
+                                    <t t-if="'Frais de port' in line.name">
+                                        <t t-set="current_fp" t-value="current_fp + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                    </t>
+                                </t>
+                                <t t-if="line.display_type == 'line_section'">
+                                    <td name="td_section_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <t t-set="current_section" t-value="line"/>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                </t>
+                                <t t-if="line.display_type == 'line_note'">
+                                    <td name="td_note_line" colspan="99">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </t>
+                            </tr>
+<!--                            <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section')">-->
+<!--                                <tr class="is-subtotal text-right">-->
+<!--                                    <td name="td_section_subtotal" colspan="99">-->
+<!--                                        <strong class="mr16">Subtotal</strong>-->
+<!--                                        <span-->
+<!--                                                t-esc="current_subtotal"-->
+<!--                                                t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'-->
+<!--                                        />-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+                        </t>
+                    </tbody>
+                </table>
+                <br />
+                <div class="row" style="margin-bottom:5px;margin-right:5px; page-break-inside: avoid;">
+                    <div class="col-6 offset-6" style="border:1px solid #ece9e5;">
+                        <div class="row">
+                            <div class="col-8">
+                                <b>Total</b>
+                            </div>
+                            <div class="col-4 text-right">
+                                <t t-esc="current_subtotal_hors_fp"  t-options='{"widget": "float", "precision": 2}' /> €
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <b>Participation aux Frais de Port H.T.</b>
+                            </div>
+                            <div class="col-4 text-right">
+                                <t t-esc="current_fp"  t-options='{"widget": "float", "precision": 2}' /> €
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-right:5px; page-break-inside: avoid;">
+                    <div class="col-4">
+                        <p>
+                            <b>Mode de règlement :</b> <t t-esc="doc.payment_term_id.name" /> <br />
+                            <b>Délai de paiement :</b> <br />
+                            <b>Observations sur la commande :</b>
+                        </p>
+                    </div>
+                    <div class="col-4">
+                        <p><b>Visa client :</b></p>
+                    </div>
+                    <div class="col-4" style="border:1px solid #ece9e5;">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Total HT: </p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span t-field="doc.amount_untaxed"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>TVA 20%: </p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span t-field="doc.amount_tax"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><b>Total TTC:</b></p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <span t-field="doc.amount_total"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row" style="page-break-inside: avoid;">
+                    <div class="col-12">
+                        <t t-esc="doc.note_swing" />
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="faal_sale_order_esat_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="faal_tempo.faal_sale_order_report_esat_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

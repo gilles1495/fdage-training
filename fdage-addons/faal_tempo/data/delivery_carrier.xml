@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="delivery_type_product_product_delivery_01" model="product.product">
+            <field name="name">Frais de port 9€</field>
+            <field name="default_code">Delivery_009</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">9.0</field>
+        </record>
+        <record id="delivery_type_01" model="delivery.carrier">
+            <field name="name">Frais de port 9€</field>
+            <field name="delivery_type">fixed</field>
+            <field name="fixed_price">9</field>
+            <field name="code">NPORT9</field>
+            <field name="product_id" ref="delivery_type_product_product_delivery_01" />
+        </record>
+        <record id="delivery_type_product_product_delivery_02" model="product.product">
+            <field name="name">Frais de port 18€</field>
+            <field name="default_code">Delivery_018</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">18.0</field>
+        </record>
+        <record id="delivery_type_02" model="delivery.carrier">
+            <field name="name">Frais de port 18€</field>
+            <field name="delivery_type">fixed</field>
+            <field name="fixed_price">18</field>
+            <field name="code">NPORT</field>
+            <field name="product_id" ref="delivery_type_product_product_delivery_02" />
+        </record>
+        <record id="delivery_type_product_product_delivery_03" model="product.product">
+            <field name="name">Frais de port Repères</field>
+            <field name="default_code">FP_REP</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+        </record>
+        <record id="delivery_type_03" model="delivery.carrier">
+            <field name="name">Frais de port Repères</field>
+            <field name="delivery_type">fixed</field>
+            <field name="fixed_price">0</field>
+            <field name="code">EPORT</field>
+            <field name="product_id" ref="delivery_type_product_product_delivery_03" />
+        </record>
+    </data>
+</odoo>
