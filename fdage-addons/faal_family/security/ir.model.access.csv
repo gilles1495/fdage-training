@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_family_role_admin,access_family_role_admin,model_family_role,base.group_system,1,1,1,1
+access_family_role_users,access_family_role_users,model_family_role,base.group_user,1,0,0,0
+access_partner_family_admin,access_partner_family_admin,model_partner_family,base.group_system,1,1,1,1
+access_partner_family_users,access_partner_family_users,model_partner_family,base.group_user,1,0,0,0

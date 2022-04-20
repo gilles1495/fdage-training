@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_family_tree" model="ir.ui.view">
+        <field name="name">faal_family.tree"</field>
+        <field name="model">partner.family</field>
+        <field name="arch" type="xml">
+            <tree string="Family Tree">
+                <field name="name"/>
+                <field name="family_members"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_partner_family_form" model="ir.ui.view">
+        <field name="name">faal_family.form"</field>
+        <field name="model">partner.family</field>
+        <field name="arch" type="xml">
+            <form string="Family Tree">
+                <sheet>
+                    <label for="name" string="Family name"/>
+                    <field name="name"/>
+                    <field name="partner_ids">
+                        <tree editable="top">
+                            <field name="family_role_id" domain="[('is_company','=',False),('type','=','contact')]"/>
+                            <field name="family_type"/>
+                            <field name="family_role_to_id" domain="[('is_company','=',False),('type','=','contact')]"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_menu_family" model="ir.actions.act_window">
+        <field name="name">Family</field>
+        <field name="res_model">partner.family</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+            parent="contacts.menu_contacts"
+            id="menu_family"
+            action="action_menu_family"/>
+</odoo>

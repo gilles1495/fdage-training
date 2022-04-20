@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* faal_family
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-20 10:38+0000\n"
+"PO-Revision-Date: 2022-04-20 10:38+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: faal_family
+#: model:ir.model.fields.selection,name:faal_family.selection__family_role__family_type__brother
+msgid "Brother"
+msgstr "Frère"
+
+#. module: faal_family
+#: model:ir.model,name:faal_family.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__create_uid
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__create_date
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__display_name
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__display_name
+msgid "Display Name"
+msgstr "Nom"
+
+#. module: faal_family
+#: model:ir.actions.act_window,name:faal_family.action_menu_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__family_id
+#: model:ir.ui.menu,name:faal_family.menu_family
+msgid "Family"
+msgstr "Famille"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__family_members
+msgid "Family Members"
+msgstr "Membres de la famille"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_res_partner__family_relation_ids
+#: model:ir.model.fields,field_description:faal_family.field_res_users__family_relation_ids
+msgid "Family Relation"
+msgstr "Relation familiale"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__family_role_id
+msgid "Family Role"
+msgstr "Membre"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__family_role_to_id
+msgid "Family Role To"
+msgstr "De"
+
+#. module: faal_family
+#: model_terms:ir.ui.view,arch_db:faal_family.view_partner_family_form
+#: model_terms:ir.ui.view,arch_db:faal_family.view_partner_family_tree
+msgid "Family Tree"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__family_type
+msgid "Family Type"
+msgstr "est"
+
+#. module: faal_family
+#: model:ir.model,name:faal_family.model_partner_family
+msgid "Family from partners"
+msgstr ""
+
+#. module: faal_family
+#: model_terms:ir.ui.view,arch_db:faal_family.view_partner_family_form
+msgid "Family name"
+msgstr "Nom de famille"
+
+#. module: faal_family
+#: model:ir.model,name:faal_family.model_family_role
+msgid "Family role relation"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields.selection,name:faal_family.selection__family_role__family_type__father
+msgid "Father"
+msgstr "Père"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__id
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__id
+msgid "ID"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role____last_update
+#: model:ir.model.fields,field_description:faal_family.field_partner_family____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__write_uid
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_family_role__write_date
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: faal_family
+#: model:ir.model.fields.selection,name:faal_family.selection__family_role__family_type__mother
+msgid "Mother"
+msgstr "Mère"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: faal_family
+#: model:ir.model.fields,field_description:faal_family.field_partner_family__partner_ids
+msgid "Partner"
+msgstr "Contact"
+
+#. module: faal_family
+#: model:ir.model.fields.selection,name:faal_family.selection__family_role__family_type__sister
+msgid "Sister"
+msgstr "Soeur"
