@@ -4,3 +4,4 @@ access_binders_admin,access_binders_admin,model_binders,base.group_system,1,1,1,
 access_etablishements_all_users,access_etablishements_all_users,model_etablishements,,1,0,0,0
 access_faal_tempo_utils,access_faal_tempo_utils,model_faal_tempo_utils,base.group_user,1,0,0,0
 access_faal_tempo_utils_admin,access_faal_tempo_utils_admin,model_faal_tempo_utils,base.group_system,1,1,1,1
+access_report_doeth,access_report_doeth,model_report_doeth,,1,1,1,1

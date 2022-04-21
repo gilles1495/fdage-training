@@ -16,19 +16,6 @@ class ReportDOETH(models.TransientModel):
 
     def get_president_name(self):
         president_name = "Gabriel Reeb"
-        company_id = self.env['res.partner'].search([
-            ('name', 'like', '%Fédération des Aveugles Alsace Lorraine%')
-        ])
-        if company_id:
-            company_id = company_id[0]
-            president_id = self.env['res.partner'].search([
-                ('parent_id', '=', company_id.id),
-                ('type', '=', 'contact'),
-                ('function', '=', 'Président')
-            ])
-            if president_id:
-                president_id = president_id[0]
-                president_name = president_id.name
         return president_name
 
     def get_client_info(self, search):

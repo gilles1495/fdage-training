@@ -10,7 +10,16 @@
             </tree>
         </field>
     </record>
-
+    <record id="view_family_role_tree" model="ir.ui.view">
+        <field name="name">faal_family_role.tree"</field>
+        <field name="model">family.role</field>
+        <field name="arch" type="xml">
+            <tree string="Family Role Tree">
+                <field name="family_role_to_name"/>
+                <field name="family_type"/>
+            </tree>
+        </field>
+    </record>
     <record id="view_partner_family_form" model="ir.ui.view">
         <field name="name">faal_family.form"</field>
         <field name="model">partner.family</field>

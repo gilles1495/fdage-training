@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_view_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+           <xpath expr="//div[@name='button_box']" position="inside">
+               <field name="family_relation_count" invisible="1"/>
+               <button type="object" class="oe_stat_button" name="family_relations" icon="fa-users" attrs="{'invisible': [('family_relation_count', '=', 0)]}">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value"><field name="family_relation_count" widget="statinfo" nolabel="1"/></span>
+                        <span class="o_stat_text">Family relations</span>
+                    </div>
+                </button>
+           </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="family_relations" string="Family relations" attrs="{'invisible': [('family_relation_count', '=', 0)]}">
+                    <field name="family_relation_ids" mode="kanban" context="{'default_family_role_id': active_id}">
+                        <kanban>
+                            <field name="family_type"/>
+                            <field name="family_role_to_id"/>
+                            <field name="family_role_to_name"/>
+                            <templates>
+                                        <t t-name="kanban-box">
+                                            <div>
+                                                <div class="o_kanban_image">
+                                                    <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.family_role_to_id.raw_value)"/>
+                                                </div>
+                                                <div class="oe_kanban_details">
+                                                    <div t-if="record.family_type.raw_value"><field name="family_type"/></div>
+                                                    <div t-if="record.family_role_to_name.raw_value"><field name="family_role_to_name"/></div>
+                                                </div>
+                                            </div>
+                                        </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
