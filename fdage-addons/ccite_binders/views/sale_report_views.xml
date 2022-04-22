@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_product_search"/>
         <field name="arch" type="xml">
             <xpath expr="//search" position="inside">
-                <field name="wallet_period"/>
+                <field name="binder_id"/>
             </xpath>
         </field>
     </record>

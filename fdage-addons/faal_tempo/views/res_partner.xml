@@ -13,9 +13,6 @@
                 <field name="ref_aux" />
             </field>
             <field name="property_payment_term_id" position="after">
-                <field name="binder_id" />
-            </field>
-            <field name="binder_id" position="after">
                 <field name="etat_risque" />
                 <field name="rank_user_vallibre_one" />
                 <field name="rank_user_vallibre_two" />

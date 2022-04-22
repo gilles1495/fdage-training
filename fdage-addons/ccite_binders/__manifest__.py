@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'views/binders.xml',
         'views/sale_order_views.xml',
+        'views/sale_report_views.xml',
         'views/res_partner_views.xml',
         'wizard/switch_binders.xml',
     ],
