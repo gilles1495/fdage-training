@@ -1,6 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_binders_all_users,access_binders_all_users,model_binders,,1,0,0,0
-access_binders_admin,access_binders_admin,model_binders,base.group_system,1,1,1,1
 access_etablishements_all_users,access_etablishements_all_users,model_etablishements,,1,0,0,0
 access_faal_tempo_utils,access_faal_tempo_utils,model_faal_tempo_utils,base.group_user,1,0,0,0
 access_faal_tempo_utils_admin,access_faal_tempo_utils_admin,model_faal_tempo_utils,base.group_system,1,1,1,1

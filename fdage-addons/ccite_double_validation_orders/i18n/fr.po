@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ccite_double_validation_orders
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-22 14:27+0000\n"
+"PO-Revision-Date: 2022-04-22 14:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ccite_double_validation_orders
+#: model:ir.model.fields,field_description:ccite_double_validation_orders.field_sale_order__has_client_validate_order
+msgid "Customer Validation"
+msgstr "Validation client"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/controllers/portal.py:0
+#, python-format
+msgid "Invalid order."
+msgstr "Commande invalide"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/controllers/portal.py:0
+#, python-format
+msgid "Invalid signature data."
+msgstr "Données de signature invalides"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/controllers/portal.py:0
+#, python-format
+msgid "Order signed by %s"
+msgstr "Bon de commande signé par %s"
+
+#. module: ccite_double_validation_orders
+#: model:ir.model,name:ccite_double_validation_orders.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/controllers/portal.py:0
+#, python-format
+msgid "Signature is missing."
+msgstr "La signature est manquante"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/controllers/portal.py:0
+#, python-format
+msgid "The order is not in a state requiring customer signature."
+msgstr "Ce devis ne nécessite pas de signature"
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/models/sale_order.py:0
+#, python-format
+msgid "Validated on "
+msgstr "Validation client le "
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/models/sale_order.py:0
+#, python-format
+msgid "Validation Canceled On "
+msgstr "Validation client annulée le "
+
+#. module: ccite_double_validation_orders
+#: code:addons/ccite_double_validation_orders/models/sale_order.py:0
+#, python-format
+msgid "You do not have the right to validate this quote."
+msgstr "Vous n'avez pas le droit de marquer cette commande comme validée"

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_binders_form" model="ir.ui.view">
+            <field name="name">binders.form</field>
+            <field name="model">binders</field>
+            <field name="arch" type="xml">
+                <form string="Classeurs">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code" placeholder="code"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_binders_list" model="ir.ui.view">
+            <field name="name">binders.list</field>
+            <field name="model">binders</field>
+            <field name="arch" type="xml">
+                <tree string="Classeurs" editable="bottom" create="1" edit="1">
+                    <field name="name"/>
+                    <field name="vendor_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="binders_action_view" model="ir.actions.act_window">
+            <field name="name">Classeurs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">binders</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Ajouter un nouveau classeur
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="binders_action_view" id="menu_action_binders" parent="sale.menu_sale_config" groups="base.group_system" sequence="4"/>
+
+        <record id="server_action_print_pdf" model="ir.actions.server">
+            <field name="name">Réaffecter le classeur</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="base.model_res_partner" />
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.swap_binders()
+            </field>
+        </record>
+
+    </data>
+</odoo>

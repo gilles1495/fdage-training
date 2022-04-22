@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_switch_binders_form" model="ir.ui.view">
+            <field name="name">switch.binders.form</field>
+            <field name="model">switch.binders</field>
+            <field name="arch" type="xml">
+                <form string="Choisir un classeur 2">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="binders_id" />
+                                <field name="res_partners_ids" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="switch_binders" string="Valider"  type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -3,7 +3,7 @@ from . import res_partner
 from . import res_users
 from . import price_list
 from . import crm_team
-from . import binders
+#from . import binders
 from . import products
 from . import sale_order
 from . import sale_order_line

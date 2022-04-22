@@ -39,7 +39,7 @@ class CustomerPortal(portal.CustomerPortal):
 
         if not order_sudo.has_to_be_paid():
             order_sudo.write({
-                'has_client_validate_order': True
+                'has_client_validate_order': True,
             })
             #order_sudo.action_confirm()
             #order_sudo._send_order_confirmation_mail()
