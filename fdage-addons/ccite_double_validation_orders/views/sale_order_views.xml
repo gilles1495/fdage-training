@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_view_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="has_client_validate_order" attrs="{'readonly': False}"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="sale_order_view_inherit_restrict" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_manager')])]"/>
+        <field name="inherit_id" ref="ccite_double_validation_orders.sale_order_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='has_client_validate_order']" position="attributes">
+                <attribute name="readonly">False</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
