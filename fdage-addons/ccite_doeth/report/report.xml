@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_custom_format_A4_no_border" model="report.paperformat">
+            <field name="name">Faal rapport Bon de Commande</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">32</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="True"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="doeth_generation_report" model="ir.actions.report">
+            <field name="name">Contrat de fourniture</field>
+            <field name="model">report.doeth</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_doeth.paperformat_custom_format_A4_no_border"/>
+            <field name="report_name">ccite_doeth.report_doeth</field>
+            <field name="report_file">ccite_doeth.report_doeth</field>
+            <field name="binding_model_id" ref="model_report_doeth"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'DOETH'</field>
+        </record>
+
+        <record id="doeth_generation_action" model="ir.actions.server">
+            <field name="name">Générer la DOETH</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list,tree,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_generate_doeth()</field>
+        </record>
+
+    </data>
+</odoo>

@@ -17,7 +17,6 @@ class Partner(models.Model):
     rank_user_vallibre_one = fields.Integer(string=u'Rang Utilisateur VALLIBRE1')
     rank_user_vallibre_two = fields.Integer(string=u'Rang Utilisateur VALLIBRE2')
 
-    binder_id = fields.Many2one('binders', string=u'Classeur')
     etablishement_id = fields.Many2one('etablishements', string=u'Etablissement')
 
     # Questions
@@ -35,20 +34,6 @@ class Partner(models.Model):
     def onchange_is_delivery_carrier(self):
         if not self.is_delivery_carrier:
             self.delivery_carrier_edi = None
-
-    def swap_binders(self):
-        return {
-            'name': _('Choisir un classeur'),
-            'view_type': 'form',
-            'view_mode': 'form',
-            'res_model': 'switch.binders',
-            'view_id': self.env.ref('faal_tempo.view_swiych_binders_form').id,
-            'type': 'ir.actions.act_window',
-            'context': {
-                'default_res_partners_ids': self.ids,
-            },
-            'target': 'new'
-        }
 
     @api.model
     def _get_default_address_format(self):

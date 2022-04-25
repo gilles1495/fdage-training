@@ -8,6 +8,9 @@
             <xpath expr="//search" position="inside">
                 <field name="binder_id"/>
             </xpath>
+            <xpath expr="//filter[@name='company']" position="after">
+                <filter name="group_binders" string="Binders" domain="[]" context="{'group_by': 'binder_id'}"/>
+            </xpath>
         </field>
     </record>
 </odoo>

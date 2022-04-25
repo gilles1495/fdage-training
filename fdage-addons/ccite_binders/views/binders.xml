@@ -43,7 +43,7 @@
 
         <menuitem action="binders_action_view" id="menu_action_binders" parent="sale.menu_sale_config" groups="base.group_system" sequence="4"/>
 
-        <record id="server_action_print_pdf" model="ir.actions.server">
+        <record id="server_action_swap_binders" model="ir.actions.server">
             <field name="name">Réaffecter le classeur</field>
             <field name="type">ir.actions.server</field>
             <field name="model_id" ref="base.model_res_partner" />

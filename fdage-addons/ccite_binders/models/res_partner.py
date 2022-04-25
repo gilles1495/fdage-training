@@ -14,7 +14,7 @@ class Partner(models.Model):
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 'switch.binders',
-            'view_id': self.env.ref('faal_tempo.view_switch_binders_form').id,
+            'view_id': self.env.ref('ccite_binders.view_switch_binders_form').id,
             'type': 'ir.actions.act_window',
             'context': {
                 'default_res_partners_ids': self.ids,

@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_binders_all_users,access_binders_all_users,model_binders,,1,0,0,0
 access_binders_admin,access_binders_admin,model_binders,base.group_system,1,1,1,1
+access_switch_binders_all_users,access_switch_binders_all_users,model_switch_binders,,1,0,0,0
+access_switch_binders_admin,access_switch_binders_admin,model_switch_binders,base.group_system,1,1,1,1

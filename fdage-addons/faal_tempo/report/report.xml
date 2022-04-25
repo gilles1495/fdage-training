@@ -103,6 +103,48 @@
             <field name="dpi">90</field>
         </record>
 
+        <record id="action_report_faal_saleorder" model="ir.actions.report">
+            <field name="name">Devis / Commande Fédération</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="faal_tempo.paperformat_custom_format_A4_no_border_with_small_bottom"/>
+            <field name="report_name">faal_tempo.faal_sale_order_report_template</field>
+            <field name="report_file">faal_tempo.faal_sale_order_report_template</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
+                (object.name)
+            </field>
+        </record>
+
+        <record id="action_report_faal_saleorder_esat" model="ir.actions.report">
+            <field name="name">Devis / Commande ESAT</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="faal_tempo.paperformat_custom_format_A4_no_border_with_small_bottom"/>
+            <field name="report_name">faal_tempo.faal_sale_order_esat_report_template</field>
+            <field name="report_file">faal_tempo.faal_sale_order_esat_report_template</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
+                (object.name)
+            </field>
+        </record>
+
+        <record id="action_report_faal_saleorder_repere" model="ir.actions.report">
+            <field name="name">Devis / Commande repère</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">faal_tempo.faal_sale_order_report_repere</field>
+            <field name="report_file">faal_tempo.faal_sale_order_report_repere</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name,
+                (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name,
+                (object.partner_id.ref or object.partner_id.parent_id.ref or ''))
+            </field>
+        </record>
+
         <report
                 id="sale.action_report_pro_forma_invoice"
                 string="Factures proforma repères"
@@ -134,36 +176,6 @@
                 file="faal_tempo.faal_report_purchaseorder_repere"
                 print_report_name="(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))"/>
 
-        <report
-                id="action_report_faal_saleorder_repere"
-                string="Devis / Commande repère"
-                model="sale.order"
-                report_type="qweb-pdf"
-                file="faal_tempo.faal_sale_order_report_repere"
-                name="faal_tempo.faal_sale_order_report_repere"
-                print_report_name="(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name, (object.partner_id.ref or object.partner_id.parent_id.ref or ''))"/>
-
-        <report
-                id="action_report_faal_saleorder"
-                string="Devis / Commande"
-                model="sale.order"
-                report_type="qweb-pdf"
-                paperformat="paperformat_custom_format_A4_no_border_with_small_bottom"
-                file="faal_tempo.faal_sale_order_report_template"
-                name="faal_tempo.faal_sale_order_report_template"
-                print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' % (object.name)"
-        />
-
-        <report
-                id="action_report_faal_saleorder_esat"
-                string="Devis / Commande ESAT"
-                model="sale.order"
-                report_type="qweb-pdf"
-                paperformat="paperformat_custom_format_A4_no_border_with_small_bottom"
-                file="faal_tempo.faal_sale_order_esat_report_template"
-                name="faal_tempo.faal_sale_order_esat_report_template"
-                print_report_name="(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' % (object.name)"
-        />
 
         <report
                 string="Bon de Livraison"
@@ -279,25 +291,5 @@
                 print_report_name="(object._get_report_filename_pdp())"
         />
 
-        <report
-                string="Contrat de fourniture"
-                id="doeth_generation_report"
-                model="report.doeth"
-                name="faal_tempo.report_doeth"
-                file="faal_tempo.report_doeth"
-                paperformat="paperformat_custom_format_A4_no_border"
-                menu="False"
-                report_type="qweb-pdf"
-                print_report_name="'DOETH'"
-        />
-
-        <record id="doeth_generation_action" model="ir.actions.server">
-            <field name="name">Générer la DOETH</field>
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="binding_model_id" ref="account.model_account_move"/>
-            <field name="binding_view_types">list,tree,form</field>
-            <field name="state">code</field>
-            <field name="code">action = records.action_generate_doeth()</field>
-        </record>
     </data>
 </odoo>
