@@ -9,6 +9,7 @@
         'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup',
     ],
     "data": [
+        'views/crm_team_views.xml',
         'report/report_sale_order.xml',
     ],
     'demo': [],
