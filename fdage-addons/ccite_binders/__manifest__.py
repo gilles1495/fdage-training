@@ -1,10 +1,10 @@
 {
     "name": "C'Cite Binders",
-    "version": "15.0.0.1.0",
+    "version": "15.0.1.0",
     "author": "Lucas Pfister",
     "category": "Custom",
     "depends": [
-        'web', 'contacts', 'sale', 'sale_management',
+        'web', 'contacts', 'sale_management',
     ],
     "data": [
         'security/ir.model.access.csv',

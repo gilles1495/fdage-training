@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
         <record id="set_customer_to_renew" model="ir.cron">
-            <field name="name">Set Customer To Renew</field>
+            <field name="name">Partner : Set Customer To Renew</field>
             <field name="model_id" ref="model_res_partner"/>
             <field name="state">code</field>
             <field name="code">model._set_customer_to_renew()</field>

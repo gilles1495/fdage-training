@@ -1,10 +1,10 @@
 {
     "name": "C'Cite Customer to Renew",
-    "version": "15.0.0.1.0",
+    "version": "15.0.1.0",
     "author": "Lucas Pfister",
     "category": "Custom",
     "depends": [
-        'contacts',
+        'contacts', 'account', 'sale',
     ],
     "data": [
         'views/res_partner_views.xml',

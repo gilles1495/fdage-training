@@ -1,5 +1,5 @@
 {
-    "name": "C'Cite Doeth",
+    "name": "C'Cité Base",
     "version": "15.0.1.0",
     "author": "Lucas Pfister",
     "category": "Custom",
@@ -9,12 +9,8 @@
         'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup',
     ],
     "data": [
-        'security/ir.model.access.csv',
-        'report/report.xml',
-        'report/report_doeth.xml',
+        'report/report_sale_order.xml',
     ],
-    'assets': {
-    },
     'demo': [],
     'installable': True,
     'application': True,
