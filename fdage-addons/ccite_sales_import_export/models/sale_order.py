@@ -23,7 +23,7 @@ class SaleOrder(models.Model):
         # Sale team information
         sale_teams = self.search_in_table_reference("SELECT id,code FROM crm_team", 'crm_team')
 
-        export_path = "/home/lucas/export"
+        export_path = "/home/odoo/export"
         # Export des commercials
         self._cr.execute(
             "SELECT res_partner.ref,res_partner.etablishement_id,res_partner.rank_user_vallibre_one,res_partner.rank_user_vallibre_two,res_partner.active,res_partner.email,res_partner.phone,res_users.nom,res_users.prenom,res_users.sale_team_id FROM res_users "
