@@ -50,7 +50,7 @@
                 <div class="row" style="padding-bottom:10px;">
                     <div class="col-12">
                         <img t-att-src="'/ccite_base/static/img/header_documents_reperes.png'"
-                             style="height:200px; top:-50px; position:absolute;left:-80px;"/>
+                             style="height:200px; top:-50px; position:absolute;left:-80px;z-index:1000;"/>
                         <t t-if="doc.state in ['draft', 'sent']">
                             <div class="text-right" style="font-size:16px;position:absolute;margin-left:880px;top:75px;">
                                 <p>
