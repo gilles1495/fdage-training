@@ -3,6 +3,7 @@
     "version": "1.1.0",
     "author": "TeMPO Consulting",
     "category": "Custom",
+    "license": "AGPL-3",
     "depends": [
         'web', 'board', 'calendar', 'contacts', 'base_automation', 'account_accountant',
         'sale', 'purchase', 'sale_management', 'delivery', 'l10n_fr_siret', 'web_map',
