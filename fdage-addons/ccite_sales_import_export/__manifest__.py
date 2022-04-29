@@ -5,10 +5,10 @@
     "category": "Custom",
     "license": "AGPL-3",
     "depends": [
-        'sale_management', 'faal_tempo',
+        'sale_management', 'ccite_def',
     ],
     "data": [
-        'data/cron.xml'
+        'data/cron.xml',
     ],
     'assets': {
     },

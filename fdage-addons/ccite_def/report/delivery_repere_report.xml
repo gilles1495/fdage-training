@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ccite_def.faal_delivery_repere_document_layout">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-12">
+                    <img t-att-src="'/ccite_def/static/img/header_documents_reperes.png'" style="height:200px; top:-50px; position:absolute;left:-80px;"/>
+                    <div class="text-right" style="font-size:16px;position:absolute;margin-left:870px;top:75px;">
+                        <p>
+                            <b>BON DE LIVRAISON<br /></b>
+                            <b>n° <t t-esc="o.name" /></b><br />
+                            <b>Date : </b><span t-field="o.date_done"  t-options='{"widget": "date"}' /><br />
+                            <b>Client :</b>
+                            <t t-if="o.partner_id.parent_id">
+                                <t t-esc="o.partner_id.parent_id.ref" />
+                            </t>
+                            <t t-else="">
+                                <t t-esc="o.partner_id.ref" />
+                            </t>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-12 text-right">
+                    <b>Page <span class="page"/> / <span class="topage"/></b>
+                </div>
+                <div class="col-12">
+                    <img t-att-src="'/ccite_def/static/img/footer_documents_reperes.png'"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="faal_delivery_repere_document">
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="ccite_def.faal_delivery_repere_document_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)" />
+            <br />
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row" style="padding-right:10px;">
+                    <div class="col-4" style="max-width:100% !important; width:290px !important;">
+                        <div style="padding-left:15px; border-left:2px solid black;">
+                            <b>repères</b><br />
+                            <p style="font-size:13px;">27 rue de la 1ère Armée<br />
+                                67000 Strasbourg<br />
+                                +33 (0)3 90 22 11 59<br />
+                                contact@reperes-signaletique.com<br />
+                                <b>www.reperes-signaletique.com</b></p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div><b><u>Information de livraison</u></b></div>
+                        <div style="font-size:13px;">
+                            Référence client : <t t-if="o.partner_id.parent_id">
+                            <t t-esc="o.partner_id.parent_id.ref" />
+                        </t>
+                            <t t-else="">
+                                <t t-esc="o.partner_id.ref" />
+                            </t>
+                            <br />
+                            N° TVA intracomm. : <t t-if="o.partner_id.parent_id">
+                            <t t-esc="o.partner_id.parent_id.vat" />
+                        </t>
+                            <t t-else="">
+                                <t t-esc="o.partner_id.vat" />
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div><b><u>Adresse de livraison</u></b></div>
+                        <div style="font-size:13px;">
+                            <t t-esc="o.partner_id.name" /><br />
+                            <t t-esc="o.partner_id.street" /><br />
+                            <t t-if="o.partner_id.street2">
+                                <t t-esc="o.partner_id.street2" /><br />
+                            </t>
+                            <t t-esc="o.partner_id.zip" /> <t t-esc="o.partner_id.city" /><br />
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <t t-set="current_subtotal" t-value="0"/>
+                <table class="table table-sm o_main_table" style="margin-top:10px; font-size:13px;">
+                    <thead>
+                        <tr>
+                            <th name="th_ref" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Référence</th>
+                            <th name="th_description" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Description</th>
+                            <th name="th_quantity" class="text-center" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Quantité</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <t t-foreach="o.get_delivery_report_lines()" t-as="line">
+                            <tr>
+                                <td name="td_ref">
+                                    <t t-esc="line['ref']"/>
+                                </td>
+                                <td name="td_description">
+                                    <t t-esc="line['name']"/>
+                                </td>
+                                <td name="td_quantity" class="text-right">
+                                    <t t-set="qte_value" t-value="line['qty']"/>
+                                    <t t-if="qte_value.is_integer()">
+                                        <t t-esc="int(qte_value)"/>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="qte_value"/>
+                                    </t>
+                                    <t t-if="qte_value">
+                                        <t t-set="current_subtotal" t-value="current_subtotal + qte_value"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <br />
+                <div class="row" style="font-size:13px;">
+                    <div class="col-4 offset-8">
+                        <div class="row">
+                            <div class="col-6 text-center"> <b>Total quantités</b></div>
+                            <div class="col-6 text-right"><b>
+                                <t t-if="current_subtotal and current_subtotal.is_integer()">
+                                    <t t-esc="int(current_subtotal)"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="current_subtotal"/>
+                                </t>
+                            </b></div>
+                        </div>
+                    </div>
+                </div>
+                <p t-field="o.note"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_faal_repere_deliveryslip">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="ccite_def.faal_delivery_repere_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
