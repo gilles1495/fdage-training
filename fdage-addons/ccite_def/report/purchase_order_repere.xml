@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="ccite_def.faal_external_layout_purchase_repere">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+                <div class="row">
+                    <div class="col-12">
+                        <img t-att-src="'/ccite_def/static/img/header_documents_reperes.png'" style="height:200px; top:-50px; position:absolute;left:-80px;"/>
+                        <t t-if="o.state == 'draft'">
+                            <div class="text-right" style="font-size:16px;position:absolute;margin-left:785px;top:65px;">
+                                <p>
+                                    <b>COMMANDE FOURNISSEUR<br /></b>
+                                    <b>n° <t t-esc="o.name" /></b><br />
+                                    <b>Date : </b><span t-field="o.date_order" t-options='{"widget": "date"}' /><br />
+                                    <b>Fournisseur : </b><t t-esc="o.partner_id.ref" /><br />
+                                    <b>Référence : </b><t t-esc="o.partner_ref" />
+                                </p>
+                            </div>
+                        </t>
+                        <t t-if="o.state in ['sent', 'to approve']">
+                            <div class="text-right" style="font-size:16px;position:absolute;margin-left:785px;top:65px;">
+                                <p>
+                                    <b>COMMANDE FOURNISSEUR<br /></b>
+                                    <b>n° <t t-esc="o.name" /></b><br />
+                                    <b>Date :</b> <span t-field="o.date_order" t-options='{"widget": "date"}' /><br />
+                                    <b>Fournisseur :</b> <t t-esc="o.partner_id.ref" /><br />
+                                    <b>Référence :</b> <t t-esc="o.partner_ref" />
+                                </p>
+                            </div>
+                        </t>
+                        <t t-if="o.state in ['purchase', 'done']">
+                            <div class="text-right" style="font-size:16px;position:absolute;margin-left:785px;top:65px;">
+                                <p>
+                                    <b>COMMANDE FOURNISSEUR<br /></b>
+                                    <b>n° <t t-esc="o.name" /></b><br />
+                                    <b>Date : </b><span t-field="o.date_approve" t-options='{"widget": "date"}' /><br/>
+                                    <b>Fournisseur : </b><t t-esc="o.partner_id.ref" /><br />
+                                    <b>Référence : </b><t t-esc="o.partner_ref" />
+                                </p>
+                            </div>
+                        </t>
+                        <t t-if="o.state == 'cancel'">
+                            <div class="text-right" style="font-size:16px;position:absolute;margin-left:785px;top:65px;">
+                                <p>
+                                    <b>COMMANDE ANNULEE<br /></b>
+                                    <b>n° <t t-esc="o.name" /></b><br />
+                                    <b>Date : </b><span t-field="o.date_order" t-options='{"widget": "date"}' /><br />
+                                    <b>Fournisseur : </b><t t-esc="o.partner_id.ref" /><br />
+                                    <b>Référence : </b><t t-esc="o.partner_ref" />
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer">
+                <div style="position:relative;">
+                    <div style="position:absolute; font-size:20px !important;">
+                        repères est une marque de l’Entreprise Adaptée de la Fédération des Aveugles Alsace Lorraine Grand Est dont la mission est reconnue d’utilité publique par arrêté préfectoral du 20 février 2003. Association inscrite au Registres des Associations du Tribunal d’Instance de Strasbourg Vol III n°7 et de la Chambre des Métiers d’Alsace N°775 641 392 RL 67. SIRET : 775 641 392 00011 - NAF 8810 C  -  N° TVA : FR 15 775 641 392 00011. Affilliée à la Fédération des Aveugles et handicapés visuels de France reconnue d’utilité publique par décret du 27 août 1921.
+                    </div>
+                    <img t-att-src="'/ccite_def/static/img/footer_documents_reperes.png'"/>
+                </div>
+            </div>
+        </template>
+        <template id="faal_report_purchaseorder_repere">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="ccite_def.report_purchaseorder_document_repere" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <template id="report_purchaseorder_document_repere">
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+            <t t-call="ccite_def.faal_external_layout_purchase_repere">
+                <br />
+                <div class="page">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                    <div class="oe_structure"/>
+                    <div class="row" style="padding-right:10px;">
+                        <div class="col-4" style="max-width:100% !important; width:290px !important;">
+                            <div style="padding-left:15px; border-left:2px solid black;">
+                                <b>repères</b><br />
+                                <p style="font-size:13px;">27 rue de la 1ère Armée<br />
+                                    67000 Strasbourg<br />
+                                    +33 (0)3 90 22 11 59<br />
+                                    contact@reperes-signaletique.com<br />
+                                    <b>www.reperes-signaletique.com</b></p>
+                            </div>
+                        </div>
+                        <div class="col-3" style="font-size:14px; margin-left:-20px;">
+                            <div><b><u>Destinataire :</u></b></div>
+                            <div style="font-size:13px;">
+                                <t t-if="o.partner_id">
+                                    <t t-esc="o.partner_id.name" /><br/><br/>
+                                    <t t-esc="o.partner_id.street" /><br/>
+                                    <t t-esc="o.partner_id.zip" /> <t t-esc="o.partner_id.city" /><br/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="col-3" style="font-size:14px; margin-left:-20px;">
+                            <div><b><u>Adresse de livraison</u></b></div>
+                            <div style="font-size:13px;">
+                                <t t-esc="o.get_parent_info(o.user_id, 'delivery', 'name')" /> <br />
+                                <t t-esc="o.get_parent_info(o.user_id, 'delivery', 'street')" /> <br />
+                                <t t-if="o.get_parent_info(o.user_id, 'delivery', 'street2')">
+                                    <t t-esc="o.get_parent_info(o.user_id, 'delivery', 'street2')" /> <br />
+                                </t>
+                                <t t-esc="o.get_parent_info(o.user_id, 'delivery', 'zip')" /> <t t-esc="o.get_parent_info(o.user_id, 'delivery', 'city')" />
+                            </div>
+                        </div>
+                        <div class="col-3" style="font-size:14px; margin-left:-20px; max-width:100% !important; width:240px !important;">
+                            <div><b><u>Adresse de facturation :</u></b></div>
+                            <div style="font-size:13px;">
+                                <t t-esc="o.get_parent_info(o.user_id, 'invoice', 'name')" /> <br />
+                                <t t-esc="o.get_parent_info(o.user_id, 'invoice', 'street')" /> <br />
+                                <t t-if="o.get_parent_info(o.user_id, 'invoice', 'street2')">
+                                    <t t-esc="o.get_parent_info(o.user_id, 'invoice', 'street2')" /> <br />
+                                </t>
+                                <t t-esc="o.get_parent_info(o.user_id, 'invoice', 'zip')" /> <t t-esc="o.get_parent_info(o.user_id, 'invoice', 'city')" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <table class="table table-sm o_main_table" style="margin-top:10px; font-size:13px;">
+                        <thead>
+                            <tr>
+                                <th name="th_ref" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Référence</th>
+                                <th name="th_description" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Description</th>
+                                <th name="th_quantity" class="text-right" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Qté</th>
+                                <th name="th_pricebrut" class="text-right" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">PU HT</th>
+                                <th name="th_pricesubtotal" class="text-right" style="border-top:none;color:black; border-bottom:1px solid #606060 !important;">Total HT</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-foreach="o.order_line" t-as="line">
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type">
+                                        <td style="border-top:none;" name="td_ref">
+                                            <t t-if="line.product_id">
+                                                <b><span t-field="line.product_id.default_code"/></b>
+                                            </t>
+                                        </td>
+                                        <td name="td_description" style="width:50%;border-top:none;">
+                                            <b><span t-field="line.name"/></b>
+                                        </td>
+                                        <td style="border-top:none;" name="td_quantity" class="text-right">
+                                            <span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 0}'/>
+                                        </td>
+                                        <td style="border-top:none;" name="td_pricebrut" class="text-right">
+                                            <span t-field="line.price_unit" t-options='{"widget": "float", "precision": 4}'/>
+                                        </td>
+                                        <td style="border-top:none;" name="td_pricesubtotal" class="text-right">
+                                            <t t-esc="o.get_sub_price(line.price_subtotal)"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td style="border-top:none;" name="td_section_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td style="border-top:none;" name="td_note_line" colspan="99">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="row" style="font-size:13px;">
+                        <div class="col-4 offset-8">
+                            <div class="row">
+                                <div class="col-6"><b>Total HT</b></div>
+                                <div class="col-6 text-right"><span t-field="o.amount_untaxed" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6"><b>TVA 20,00%</b></div>
+                                <div class="col-6 text-right"><span t-field="o.amount_tax" /></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6"><b>Total TTC</b></div>
+                                <div class="col-6 text-right"><span t-field="o.amount_total" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="font-size:13px;">
+                        <div class="col-12">Demandeur : <t t-esc="o.user_id.name" /></div>
+                    </div>
+
+                    <p t-field="o.notes"/>
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

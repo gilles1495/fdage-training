@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_custom_format_faal_no_border" model="report.paperformat">
+            <field name="name">Faal rapport Devis / Commande</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border" model="report.paperformat">
+            <field name="name">Faal rapport Bon de Commande</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">32</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="True"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_repere_purchase" model="report.paperformat">
+            <field name="name">Faal Commande fournisseur Repères</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_no_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_with_small_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_A4_no_border_with_bottom" model="report.paperformat">
+            <field name="name">Faal rapport Facture</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">35</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">42</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="paperformat_custom_format_custom_label" model="report.paperformat">
+            <field name="name">Faal Étiquettes d'expédition</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_width">210</field>
+            <field name="page_height">145</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_report_faal_saleorder" model="ir.actions.report">
+            <field name="name">Devis / Commande Fédération</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border_with_small_bottom"/>
+            <field name="report_name">ccite_def.faal_sale_order_report_template</field>
+            <field name="report_file">ccite_def.faal_sale_order_report_template</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
+                (object.name)
+            </field>
+        </record>
+
+        <record id="action_report_faal_saleorder_esat" model="ir.actions.report">
+            <field name="name">Devis / Commande ESAT</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border_with_small_bottom"/>
+            <field name="report_name">ccite_def.faal_sale_order_esat_report_template</field>
+            <field name="report_file">ccite_def.faal_sale_order_esat_report_template</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
+                (object.name)
+            </field>
+        </record>
+
+        <record id="action_report_faal_saleorder_repere" model="ir.actions.report">
+            <field name="name">Devis / Commande repère</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ccite_def.faal_sale_order_report_repere</field>
+            <field name="report_file">ccite_def.faal_sale_order_report_repere</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis_reperes_%s_%s' % (object.name,
+                (object.partner_id.ref or object.partner_id.parent_id.ref or ''))) or 'Commande_reperes_%s_%s' % (object.name,
+                (object.partner_id.ref or object.partner_id.parent_id.ref or ''))
+            </field>
+        </record>
+
+        <record id="action_report_pro_forma_invoice" model="ir.actions.report">
+            <field name="name">Factures proforma repères</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ccite_def.faal_report_sale_order_proforma_reperes</field>
+            <field name="report_file">ccite_def.faal_report_sale_order_proforma_reperes</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('sale.group_proforma_sales'))]"/>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+        </record>
+
+        <record id="action_report_purchase_order" model="ir.actions.report">
+            <field name="name">Commande fournisseur</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border_with_small_bottom"/>
+            <field name="report_name">ccite_def.faal_report_purchaseorder</field>
+            <field name="report_file">ccite_def.faal_report_purchaseorder</field>
+            <field name="binding_model_id" ref="model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))</field>
+        </record>
+
+        <record id="action_report_purchase_repere" model="ir.actions.report">
+            <field name="name">Commande fournisseur repères</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ccite_def.faal_report_purchaseorder_repere</field>
+            <field name="report_file">ccite_def.faal_report_purchaseorder_repere</field>
+            <field name="binding_model_id" ref="model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))</field>
+        </record>
+
+        <record id="action_report_delivery" model="ir.actions.report">
+            <field name="name">Bon de Livraison</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border"/>
+            <field name="report_name">ccite_def.report_faal_deliveryslip</field>
+            <field name="report_file">ccite_def.report_faal_deliveryslip</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Bon de livraison - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        </record>
+
+         <record id="action_report_delivery_repere" model="ir.actions.report">
+            <field name="name">Bon de Livraison repères</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ccite_def.report_faal_repere_deliveryslip</field>
+            <field name="report_file">ccite_def.report_faal_repere_deliveryslip</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Bon de livraison - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        </record>
+
+        <record id="ccite_def_bon_de_livraison" model="ir.actions.report">
+            <field name="name">Bon de préparation</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border"/>
+            <field name="report_name">ccite_def.faal_picking_document</field>
+            <field name="report_file">ccite_def.faal_picking_document</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Bon de préparation - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        </record>
+
+         <record id="ccite_def_bon_de_livraison_repere" model="ir.actions.report">
+            <field name="name">Bon de préparation repère</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border"/>
+            <field name="report_name">ccite_def.faal_picking_repere_document</field>
+            <field name="report_file">ccite_def.faal_picking_repere_document</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Bon de préparation - %s - %s' % (object.partner_id.name or '', object.name)</field>
+        </record>
+
+        <record id="ccite_def_bon_dexpedition" model="ir.actions.report">
+            <field name="name">Étiquettes d'expédition</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border"/>
+            <field name="report_name">ccite_def.faal_expedition_ticket_document</field>
+            <field name="report_file">ccite_def.faal_expedition_ticket_document</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'Étiquettes d\'expédition'</field>
+        </record>
+
+        <record id="account_invoices" model="ir.actions.report">
+            <field name="name">Factures</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border_with_bottom"/>
+            <field name="report_name">ccite_def.faal_report_invoice_with_payments</field>
+            <field name="report_file">ccite_def.faal_report_invoice_with_payments</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+        </record>
+
+        <record id="account_invoices_esat" model="ir.actions.report">
+            <field name="name">Factures ESAT</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="paperformat_id" ref="ccite_def.paperformat_custom_format_A4_no_border_with_bottom"/>
+            <field name="report_name">ccite_def.faal_report_esat_invoice_with_payments</field>
+            <field name="report_file">ccite_def.faal_report_esat_invoice_with_payments</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+        </record>
+
+         <record id="account_invoices_repere" model="ir.actions.report">
+            <field name="name">Factures repères</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ccite_def.faal_report_invoice_repere_with_payments</field>
+            <field name="report_file">ccite_def.faal_report_invoice_repere_with_payments</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+        </record>
+
+        <!--<report
+                string="Factures proforma repères"
+                id="account.account_invoices_repere_proformat"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="ccite_def.faal_report_invoice_repere_no_payments"
+                file="ccite_def.faal_report_invoice_repere_no_payments"
+                attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+                print_report_name="(object._get_report_base_filename())"
+                groups="account.group_account_invoice"
+        />-->
+
+        <record id="BL_file_export" model="ir.actions.report">
+            <field name="name">Fichier DPD</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-text</field>
+            <field name="report_name">ccite_def.report_dpd_file_content</field>
+            <field name="report_file">ccite_def.report_dpd_file_content</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">(object._get_report_filename_pdp())</field>
+        </record>
+
+    </data>
+</odoo>

@@ -7,12 +7,18 @@
     "depends": [
         'web', 'board', 'calendar', 'contacts', 'base_automation', 'account_accountant',
         'sale', 'purchase', 'sale_management', 'delivery', 'l10n_fr_siret', 'web_map',
-        'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup', 'faal_tempo',
+        'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup', 'ccite_def',
     ],
     "data": [
         'views/crm_team_views.xml',
         'report/report_sale_order.xml',
     ],
+    "assets": {
+        "web.assets_backend": [
+             "/ccite_base/static/src/css/faal_contact.css",
+             "/ccite_base/static/src/js/widgets/faal_contact.js",
+        ]
+    },
     'demo': [],
     'installable': True,
     'application': True,

@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <record id="res_partner_view_filter_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.filter.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="binder_id" string="Classeur"/>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter context="{'group_by': 'binder_id'}" name="x_group_by_binder_id" string="Classeur"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_partner_view_tree_inherit" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="binder_id" string="Classeur"/>
+            </xpath>
+        </field>
+    </record>
     <record id="res_partner_view_inherit" model="ir.ui.view">
         <field name="name">res.partner.view.inherit</field>
         <field name="model">res.partner</field>

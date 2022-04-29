@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="faal_purchase_order_repere_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="ccite_def.faal_purchase_order_repere_report_document" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="faal_purchase_order_repere_report_document">
+            <t t-call="web.basic_layout">
+                <t t-set="doc" t-value="doc.with_context(lang=lang)" />
+                <div class="page" style="font-size:20px !important">
+                    <img t-att-src="'/ccite_def/static/img/header_repere.png'" style="width:1500px; margin-left:-20px; margin-bottom:20px;" />
+                    <div class="row" style="margin-left:-5px;padding-left:10px; padding-right:10px; margin-bottom:20px;">
+                        <div class="col-6" style="color:#515757;">
+                            <h2><b>COMMANDE FOURNISSEUR N° <t t-esc="doc.name" /></b></h2>
+                            <br />
+                            <t t-if="doc.state != 'purchase'">
+                                <p>Date : <b><t t-esc="doc.date_order" /></b></p>
+                            </t>
+                            <t else="">
+                                <p>Date : <b><t t-esc="doc.date_approve" /></b></p>
+                            </t>
+                            <p>Fournisseur : <b><t t-esc="doc.partner_id.name" /></b></p>
+                            <p>Référence : <b><t t-esc="doc.partner_ref" /></b></p>
+                        </div>
+                        <div class="col-6" style="color:#515757; border:1px solid #C7C7C7; padding:20px;">
+                            <p>
+                                <b>Destinataire :</b><br /><t t-esc="doc.partner_id.name" />
+                            </p>
+                            <p>
+                                <t t-esc="doc.partner_id.street" /><br />
+                                <t t-esc="doc.partner_id.zip" /> - <t t-esc="doc.partner_id.city" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left:-5px;padding-left:50px; padding-right:10px;">
+                        <div class="col-6" style="color:#515757; border:1px solid #C7C7C7; padding:20px; margin-right:20px; margin-left:-40px;">
+                            <p>
+                                <b>Adresse de livraison :</b><br />
+                                Fédération des Aveugles Alsace Lorraine Grand Est9 rue Sengenwald<br />
+                                67000 - STRASBOURG<br />
+                                <b>Livraison uniquement du lundi au jeudi</b>
+                            </p>
+                        </div>
+                        <div class="col-6" style="color:#515757; border:1px solid #C7C7C7; padding:20px;">
+                            <p>
+                                <b>Adresse de facturation :</b><br/>
+                                repères<br />
+                                27 rue de la 1ère Armée - CS 50035<br />
+                                67065 STRASBOURG <br />
+                                FRANCE
+                            </p>
+                        </div>
+                    </div>
+                    <br />
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th name="th_ref" class="text-center" style="background-color:#F1F1F1;">Référence</th>
+                                <th name="th_ref_fourni" class="text-center" style="background-color:#F1F1F1;">Référence fournisseur</th>
+                                <th name="th_desc" class="text-center" style="background-color:#F1F1F1;">Description</th>
+                                <th name="th_quantity" class="text-center" style="background-color:#F1F1F1;">Quantité</th>
+                                <th name="th_puht" class="text-center" style="background-color:#F1F1F1;">PU H.T</th>
+                                <th name="th_discount" class="text-center" style="background-color:#F1F1F1;">R.</th>
+                                <th name="th_puht_net" class="text-center" style="background-color:#F1F1F1;">PU H.T net</th>
+                                <th name="th_total_ht" class="text-center" style="background-color:#F1F1F1;">Total H.T.</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="doc.order_line" t-as="line">
+                                <tr>
+                                    <td name="td_ref"><t t-esc="line.product_id.default_code"/></td>
+                                    <t t-if="line.product_id and line.product_tmpl_id and line.product_tmpl_id.seller_ids">
+                                        <t t-foreach="line.product_tmpl_id.seller_ids" t-as="seller_info">
+                                            <t t-if="seller_info.name == "></t>
+                                        </t>
+                                    </t
+                                    ><t t-else="">
+                                        <td name="th_ref_fourni"> </td>
+                                    </t>
+                                    <td name="td_quantity" class="text-right">
+                                        <t t-set="qte_value" t-value="doc.get_description_picking(line, 'qte')" />
+                                        <t t-esc="qte_value"/>
+                                        <t t-set="current_subtotal" t-value="current_subtotal + qte_value" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
