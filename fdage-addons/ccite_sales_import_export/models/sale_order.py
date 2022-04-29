@@ -347,8 +347,8 @@ class SaleOrder(models.Model):
         # path = os.path.dirname(os.path.dirname(__file__)) + '/data/Commandes_Swing/'
         # saved_path = os.path.dirname(os.path.dirname(__file__)) + '/data/Commandes_Swing/passed/'
         path = "/home/odoo/import/sales/"
-        saved_path = "home/odoo/import/sales/passed/"
-        log_path = "home/odoo/import/sales/logs/"
+        saved_path = "/home/odoo/import/sales/passed/"
+        log_path = "/home/odoo/import/sales/logs/"
 
         # Génération nom de fichier de log
         for file in os.listdir(path):
