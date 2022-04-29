@@ -6,7 +6,7 @@
     "depends": [
         'web', 'board', 'calendar', 'contacts', 'base_automation', 'account_accountant',
         'sale', 'purchase', 'sale_management', 'delivery', 'l10n_fr_siret', 'web_map',
-        'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup',
+        'stock', 'account', 'mrp', 'partner_credit_limit', 'purchase_discount', 'account_followup', 'faal_tempo',
     ],
     "data": [
         'views/crm_team_views.xml',
