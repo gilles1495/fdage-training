@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_commercial_contact" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Contacts</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">["|", "|", "|", ["user_ids.id", "!=", False], "&amp;", ["is_company", "=", False], ["parent_id", "=",
+                False], "&amp;", ["is_company", "=", True], ["user_id", "=", user.id], "&amp;", "&amp;", ["is_company", "=", False],
+                ["parent_is_company", "=", True], ["parent_id.user_id", "=", user.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_salesman'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_commercial_invoice" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Factures</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">["&amp;", "|", ["move_type", "=", "out_invoice"], ["move_type", "=", "out_refund"], "|",
+                ["partner_id.user_id", "=", user.id], ["partner_id.parent_id.user_id", "=", user.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_salesman'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_commercial_invoice_lines" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Lignes de factures</field>
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="domain_force">["&amp;", ["move_id.move_type", "in", ("out_invoice", "out_refund", "in_invoice",
+                "in_refund")],"|",["move_id.partner_id.user_id","=",user.id],["move_id.partner_id.parent_id.user_id","=",user.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_salesman'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_commercial_sale_order" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Bons de commande</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="domain_force">["|", ["partner_id.user_id", "=", user.id], ["user_id", "=", user.id]]</field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_salesman'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_commercial_sale_order_lines" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Lignes de bons de commande</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_salesman'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_manager_contact" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Manager] Contacts</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">["|", "|", "|", ["user_ids.id", "!=", False], "&amp;", ["is_company", "=", False], ["parent_id", "=",
+                False], "&amp;", ["is_company", "=", True], ["user_id.sale_team_id", "=", user.sale_team_id.id], "&amp;", "&amp;",
+                ["is_company", "=", False],
+                ["parent_is_company", "=", True], ["parent_id.user_id.sale_team_id", "=", user.sale_team_id.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_manager'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_manager_sale_order" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Manager] Bons de commande</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="domain_force">[["user_id.sale_team_id","=",user.sale_team_id.id]]</field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_manager'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_manager_sale_order_lines" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Manager] Lignes de bons de commande</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_manager'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_manager_invoice" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Factures</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="domain_force">["&amp;", "|", ["move_type", "=", "out_invoice"], ["move_type", "=", "out_refund"], "|",
+                ["partner_id.user_id.sale_team_id", "=", user.sale_team_id.id], ["partner_id.parent_id.user_id.sale_team_id", "=",
+                user.sale_team_id.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_manager'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+        <record id="crm_manager_invoice_lines" model="ir.rule">
+            <field name="name">[C'Cité][CRM][Commercial] Lignes de factures</field>
+            <field name="model_id" ref="account.model_account_move_line"/>
+            <field name="domain_force">["&amp;", ["move_id.move_type", "in", ("out_invoice", "out_refund", "in_invoice",
+                "in_refund")], "|", ["move_id.partner_id.user_id.sale_team_id", "=", user.sale_team_id.id],
+                ["move_id.partner_id.parent_id.user_id.sale_team_id", "=", user.sale_team_id.id]]
+            </field>
+            <field name="groups" eval="[(4, ref('ccite_crm_rights.crm_manager'))]"/>
+            <field eval="0" name="perm_write"/>
+            <field eval="1" name="perm_read"/>
+            <field eval="0" name="perm_unlink"/>
+            <field eval="0" name="perm_create"/>
+        </record>
+    </data>
+</odoo>

@@ -112,8 +112,8 @@
             <field name="report_file">ccite_def.faal_sale_order_report_template</field>
             <field name="binding_model_id" ref="model_sale_order"/>
             <field name="binding_type">report</field>
-            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
-                (object.name)
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or
+                'Bon de commande - %s' % (object.name)
             </field>
         </record>
 
@@ -126,8 +126,8 @@
             <field name="report_file">ccite_def.faal_sale_order_esat_report_template</field>
             <field name="binding_model_id" ref="model_sale_order"/>
             <field name="binding_type">report</field>
-            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or 'Bon de commande - %s' %
-                (object.name)
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Devis - %s' % (object.name)) or
+                'Bon de commande - %s' % (object.name)
             </field>
         </record>
 
@@ -167,7 +167,9 @@
             <field name="report_file">ccite_def.faal_report_purchaseorder</field>
             <field name="binding_model_id" ref="model_purchase_order"/>
             <field name="binding_type">report</field>
-            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande
+                Fournisseur - %s' % (object.name))
+            </field>
         </record>
 
         <record id="action_report_purchase_repere" model="ir.actions.report">
@@ -178,7 +180,9 @@
             <field name="report_file">ccite_def.faal_report_purchaseorder_repere</field>
             <field name="binding_model_id" ref="model_purchase_order"/>
             <field name="binding_type">report</field>
-            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande Fournisseur - %s' % (object.name))</field>
+            <field name="print_report_name">(object.state in ('draft', 'sent') and 'Demande de prix - %s' % (object.name) or 'Commande
+                Fournisseur - %s' % (object.name))
+            </field>
         </record>
 
         <record id="action_report_delivery" model="ir.actions.report">
@@ -193,7 +197,7 @@
             <field name="print_report_name">'Bon de livraison - %s - %s' % (object.partner_id.name or '', object.name)</field>
         </record>
 
-         <record id="action_report_delivery_repere" model="ir.actions.report">
+        <record id="action_report_delivery_repere" model="ir.actions.report">
             <field name="name">Bon de Livraison repères</field>
             <field name="model">stock.picking</field>
             <field name="report_type">qweb-pdf</field>
@@ -216,7 +220,7 @@
             <field name="print_report_name">'Bon de préparation - %s - %s' % (object.partner_id.name or '', object.name)</field>
         </record>
 
-         <record id="ccite_def_bon_de_livraison_repere" model="ir.actions.report">
+        <record id="ccite_def_bon_de_livraison_repere" model="ir.actions.report">
             <field name="name">Bon de préparation repère</field>
             <field name="model">stock.picking</field>
             <field name="report_type">qweb-pdf</field>
@@ -268,7 +272,7 @@
             <field name="print_report_name">(object._get_report_base_filename())</field>
         </record>
 
-         <record id="account_invoices_repere" model="ir.actions.report">
+        <record id="account_invoices_repere" model="ir.actions.report">
             <field name="name">Factures repères</field>
             <field name="model">account.move</field>
             <field name="report_type">qweb-pdf</field>

@@ -40,7 +40,7 @@
         'views/l10n_form_inherith_view.xml',
         'data/res_country_data.xml',
         'data/etablishement.xml',
-        'data/cron.xml',
+        # 'data/cron.xml',
         'data/crm_team.xml',
         'data/res_partner_title.xml',
         'data/account.account.xml',
