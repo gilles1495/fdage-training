@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_salesman" model="res.groups">
+        <field name="name">Commercial</field>
+        <field name="comment">Commercial standard</field>
+        <field name="category_id" ref="base.module_category_sales_crm"/>
+        <!--            <field name="implied_ids" eval="[(4, ref('group_sale_salesman_all_leads'))]"/>-->
+        <!--            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>-->
+    </record>
+    <record id="crm_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="comment">Manager standard</field>
+        <field name="category_id" ref="base.module_category_sales_crm"/>
+        <field name="implied_ids" eval="[(4, ref('crm_salesman'))]"/>
+        <!--            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>-->
+    </record>
+</odoo>

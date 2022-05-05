@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="priority">90</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id" eval="[(6,0,[ref('sales_team.group_sale_salesman')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
+                   position="after">
+                <field name="is_unit_price_editable" invisible="1"/>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='price_unit']"
+                   position="attributes">
+                <attribute name="attrs">{"readonly": ['|', ["qty_invoiced",">", 0], '&amp;', ["qty_invoiced","=", 0], ["is_unit_price_editable",
+                    "=", False]]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

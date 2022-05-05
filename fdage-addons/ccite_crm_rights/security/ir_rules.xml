@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <delete model="ir.rule" id="sale.account_invoice_rule_see_personal"/>-->
+    <!--    <delete model="ir.rule" id="ccite_base.account_invoice_rule_see_personal"/>-->
+    <data>
+        <!-- Factures -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'sale'), ('name', '=', 'account_invoice_rule_see_personal')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="sale.account_invoice_rule_see_personal" model="ir.rule">
+            <field name="name">Personal Invoices [C'Cité]</field>
+            <field name="domain_force">[('move_type', 'in', ('out_invoice', 'out_refund')), ('invoice_user_id', '=', user.id)]
+            </field>
+            <field eval="0" name="perm_write"></field>
+            <field eval="1" name="perm_read"></field>
+            <field eval="0" name="perm_unlink"></field>
+            <field eval="0" name="perm_create"></field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'sale'), ('name', '=', 'account_invoice_rule_see_personal')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function>
+    </data>
+</odoo>
