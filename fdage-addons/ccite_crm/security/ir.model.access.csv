@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_catalog,access_catalog,model_catalog,,1,1,1,1
+access_bi,access_bi,model_bi,,1,1,1,1

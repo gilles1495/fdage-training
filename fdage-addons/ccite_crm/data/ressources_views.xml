@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="catalog_form_view" model="ir.ui.view">
+            <field name="name">catalog.form.view</field>
+            <field name="model">catalog</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <iframe src="https://www.aveugles-pole-travail.fr/catalogue/" frameborder="0"
+                            style="margin-top:20px; width:100%; height:calc(100% - 27px);"/>
+                </sheet>
+            </field>
+        </record>
+
+        <record id="bi_form_view" model="ir.ui.view">
+            <field name="name">bi.form.view</field>
+            <field name="model">bi</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <iframe src="https://app.powerbi.com/reportEmbed?reportId=f0d9c615-f6ec-41ed-a8a8-aa23c3cb214b&amp;autoAuth=true&amp;ctid=309f470b-b050-4c68-bda2-62b7784fb2e7&amp;config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWZyYW5jZS1jZW50cmFsLWEtcHJpbWFyeS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"
+                            frameborder="0" style="margin-top:20px; width:100%; height:calc(100% - 27px);"/>
+                </sheet>
+            </field>
+        </record>
+
+        <record id="action_catalog" model="ir.actions.act_window">
+            <field name="name">Catalogue</field>
+            <field name="res_model">catalog</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <record id="action_bi" model="ir.actions.act_window">
+            <field name="name">Power BI</field>
+            <field name="res_model">bi</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem
+                id="action_menu_ressources"
+                parent="crm.crm_menu_root"
+                name="Ressources"
+                sequence="21"/>
+
+        <menuitem
+                action="action_catalog"
+                id="action_menu_catalog"
+                parent="ccite_crm.action_menu_ressources"
+                name="Catalogue"
+                sequence="1"/>
+
+        <menuitem
+                action="action_bi"
+                id="action_menu_bi"
+                parent="ccite_crm.action_menu_ressources"
+                name="Power BI"
+                sequence="2"/>
+    </data>
+</odoo>

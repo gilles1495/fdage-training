@@ -1,18 +1,15 @@
 {
-    "name": "C'Cité CRM Rights",
+    "name": "C'Cité CRM",
     "version": "15.0.1.0",
     "author": "Lucas Pfister",
     "category": "Custom",
     "license": "AGPL-3",
     "depends": [
-        'sale', 'ccite_def',
+        'sale', 'ccite_def', 'ccite_crm_rights',
     ],
     "data": [
-        "security/ir_rules.xml",
-        "security/crm_security.xml",
-        "security/crm_security_rules.xml",
-        "views/product_views.xml",
-        "views/res_partner_views.xml",
+        'security/ir.model.access.csv',
+        'data/ressources_views.xml',
     ],
     'demo': [],
     'installable': True,
