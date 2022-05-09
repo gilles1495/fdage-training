@@ -42,10 +42,6 @@
 	path = oca-addons/operating-unit
 	url = https://github.com/OCA/operating-unit.git
 	branch = 14.0
-[submodule "oca-addons/social"]
-	path = oca-addons/social
-	url = https://github.com/OCA/social.git
-	branch = 14.0
 [submodule "oca-addons/social15"]
 	path = oca-addons/social15
 	url = https://github.com/OCA/social.git
