@@ -5,10 +5,10 @@
             <field name="name">catalog.form.view</field>
             <field name="model">catalog</field>
             <field name="arch" type="xml">
-                <sheet>
+                <form>
                     <iframe src="https://www.aveugles-pole-travail.fr/catalogue/" frameborder="0"
-                            style="margin-top:20px; width:100%; height:calc(100% - 27px);"/>
-                </sheet>
+                            style="width:100%; height:100%;"/>
+                </form>
             </field>
         </record>
 
@@ -16,10 +16,10 @@
             <field name="name">bi.form.view</field>
             <field name="model">bi</field>
             <field name="arch" type="xml">
-                <sheet>
+                <form>
                     <iframe src="https://app.powerbi.com/reportEmbed?reportId=f0d9c615-f6ec-41ed-a8a8-aa23c3cb214b&amp;autoAuth=true&amp;ctid=309f470b-b050-4c68-bda2-62b7784fb2e7&amp;config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLWZyYW5jZS1jZW50cmFsLWEtcHJpbWFyeS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"
-                            frameborder="0" style="margin-top:20px; width:100%; height:calc(100% - 27px);"/>
-                </sheet>
+                            frameborder="0" style="width:100%; height:100%;"/>
+                </form>
             </field>
         </record>
 
