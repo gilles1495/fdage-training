@@ -5,7 +5,7 @@
     "category": "Custom",
     "license": "AGPL-3",
     "depends": [
-        'sale', 'ccite_def',
+        'sale', 'mail', 'ccite_def',
     ],
     "data": [
         "security/ir_rules.xml",
