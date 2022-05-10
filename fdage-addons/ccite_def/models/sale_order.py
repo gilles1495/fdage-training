@@ -79,7 +79,7 @@ class SaleOrder(models.Model):
     partner_id_city = fields.Char(string=u'Ville', compute='_get_partner_id_city')
     partner_id_zip = fields.Char(string=u'Code postal', compute='_get_partner_id_city')
     partner_id_code = fields.Char(string=u'Code', compute='_get_partner_id_city')
-    note_swing = fields.Char(string=u'Commentaire')
+    note_swing = fields.Text(string=u'Commentaire')
     sale_order_name_ref = fields.Char(string=u'Nom du vendeur', compute='_get_vendor_name')
     new_order = fields.Boolean(string=u'Nouvelle commande', default=False)
     repere_delay = fields.Char(string=u'Délais estimatif', default="3 à 4 semaines à réception de la commande.")

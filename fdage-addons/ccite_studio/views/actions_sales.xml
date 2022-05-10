@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Creation d'un groupe void -->
+    <record id="make_invisible" model="res.groups">
+        <field name="name">Invisible</field>
+    </record>
+
+    <!-- On rend invisible des menus par défaut -->
+    <record model="ir.ui.menu" id="sale.menu_sale_quotations">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="sale.menu_sale_order">
+        <field name="groups_id" eval="[(6, 0, [ref('make_invisible')])]"/>
+    </record>
+
+    <!-- Action Devis -->
+    <record id="sales_quotations_action" model="ir.actions.act_window">
+        <field name="name">Devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[('state', 'in', ('draft', 'sent'))]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des devis
+            </p>
+        </field>
+    </record>
+
+    <!-- Action Commandes -->
+    <record id="sales_sale_order_action" model="ir.actions.act_window">
+        <field name="name">Commandes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des commandes
+            </p>
+        </field>
+    </record>
+
+    <!-- Action Livraisons -->
+    <record id="sales_stock_picking_action" model="ir.actions.act_window">
+        <field name="name">Livraisons</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[["picking_type_code","=","outgoing"]]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des livraisons client
+            </p>
+        </field>
+    </record>
+
+    <!-- Action Factures -->
+    <record id="sales_account_invoices_action" model="ir.actions.act_window">
+        <field name="name">Factures</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type', '=', 'out_invoice')]</field>
+        <field name="context">{'default_move_type': 'out_invoice'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des factures
+            </p>
+        </field>
+    </record>
+
+    <!-- Action Avoirs -->
+    <record id="sales_account_refunds_action" model="ir.actions.act_window">
+        <field name="name">Avoirs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type', '=', 'out_refund')]</field>
+        <field name="context">{'default_move_type': 'out_refund'}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des avoirs
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TER) / Devis -->
+    <record id="sales_en_cours_ter_quotations_action" model="ir.actions.act_window">
+        <field name="name">En cours (TER) - Devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[("state","in", ("draft", "sent")),["team_id","=",5]]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des devis
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TER) / Commandes -->
+    <record id="sales_en_cours_ter_sale_order_action" model="ir.actions.act_window">
+        <field name="name">En cours (TER) - Commandes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","!=","invoiced"],["state","in",("sale","done")],["effective_date","=",False],["team_id","=",
+            5]]
+        </field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TER) / A livrer -->
+    <record id="sales_en_cours_ter_stock_picking_action" model="ir.actions.act_window">
+        <field name="name">En cours (TER) - à livrer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">
+            [["picking_type_code","=","outgoing"],["sale_id.team_id","=",5],["state","in",("confirmed","waiting","assigned")]]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des livraisons client
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TER) / A facturer -->
+    <record id="sales_en_cours_ter_to_invoice_action" model="ir.actions.act_window">
+        <field name="name">En cours (TER) - à facturer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","=","to invoice"],["effective_date","!=",False],["team_id","=", 5]]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes à facturer
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TER) / A comptabiliser -->
+    <record id="sales_en_cours_ter_to_post_action" model="ir.actions.act_window">
+        <field name="name">En cours (TER) - à comptabiliser</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'draft'), ('team_id', '=', 5), ('move_type', '=', 'out_invoice')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des factures à comptabiliser
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TEL) / Devis -->
+    <record id="sales_en_cours_tel_quotations_action" model="ir.actions.act_window">
+        <field name="name">En cours (TEL) - Devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[("state","in", ("draft", "sent")),["team_id","in", (6, 8)]]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des devis
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TEL) / Commandes -->
+    <record id="sales_en_cours_tel_sale_order_action" model="ir.actions.act_window">
+        <field name="name">En cours (TEL) - Commandes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">
+            [["invoice_status","!=","invoiced"],["state","in",("sale","done")],["effective_date","=",False],["team_id","in",
+            (6, 8)]]
+        </field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TEL) / A livrer -->
+    <record id="sales_en_cours_tel_stock_picking_action" model="ir.actions.act_window">
+        <field name="name">En cours (TEL) - à livrer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">
+            [["picking_type_code","=","outgoing"],["sale_id.team_id","in", (6, 8)],["state","in",("confirmed","waiting","assigned")]]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des livraisons client
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TEL) / A facturer -->
+    <record id="sales_en_cours_tel_to_invoice_action" model="ir.actions.act_window">
+        <field name="name">En cours (TEL) - à facturer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","=","to invoice"],["effective_date","!=",False],["team_id","in", (6, 8)]]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes à facturer
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (TEL) / A comptabiliser -->
+    <record id="sales_en_cours_tel_to_post_action" model="ir.actions.act_window">
+        <field name="name">En cours (TEL) - à comptabiliser</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'draft'), ('team_id', 'in', (6, 8)), ('move_type', '=', 'out_invoice')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des factures à comptabiliser
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (reperes) / Devis -->
+    <record id="sales_en_cours_reperes_quotations_action" model="ir.actions.act_window">
+        <field name="name">En cours (repères) - Devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[("state","in", ("draft", "sent")),["team_id","=", 9]]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des devis
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (reperes) / Commandes -->
+    <record id="sales_en_cours_reperes_sale_order_action" model="ir.actions.act_window">
+        <field name="name">En cours (repères) - Commandes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","!=","invoiced"],["state","in",("sale","done")],["effective_date","=",False],["team_id","=",
+            9]]
+        </field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (reperes) / A livrer -->
+    <record id="sales_en_cours_reperes_stock_picking_action" model="ir.actions.act_window">
+        <field name="name">En cours (repères) - à livrer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">
+            [["picking_type_code","=","outgoing"],["sale_id.team_id","=", 9],["state","in",("confirmed","waiting","assigned")]]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des livraisons client
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (reperes) / A facturer -->
+    <record id="sales_en_cours_reperes_to_invoice_action" model="ir.actions.act_window">
+        <field name="name">En cours (repères) - à facturer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","=","to invoice"],["effective_date","!=",False],["team_id","=", 9]]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes à facturer
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (reperes) / A comptabiliser -->
+    <record id="sales_en_cours_reperes_to_post_action" model="ir.actions.act_window">
+        <field name="name">En cours (repères) - à comptabiliser</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'draft'), ('team_id', '=', 9), ('move_type', '=', 'out_invoice')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des factures à comptabiliser
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (divers) / Devis -->
+    <record id="sales_en_cours_divers_quotations_action" model="ir.actions.act_window">
+        <field name="name">En cours (divers) - Devis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="domain">[("state","in", ("draft", "sent")),["team_id","not in", (5, 6, 8, 9)]]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des devis
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (divers) / Commandes -->
+    <record id="sales_en_cours_divers_sale_order_action" model="ir.actions.act_window">
+        <field name="name">En cours (divers) - Commandes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","!=","invoiced"],["state","in",("sale","done")],["effective_date","=",False],
+            ["team_id","not in", (5, 6, 8, 9)]]
+        </field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (divers) / A livrer -->
+    <record id="sales_en_cours_divers_stock_picking_action" model="ir.actions.act_window">
+        <field name="name">En cours (divers) - à livrer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[["picking_type_code","=","outgoing"],["sale_id.team_id","not in", (5, 6, 8,
+            9)],["state","in",("confirmed","waiting","assigned")]]
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des livraisons client
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (divers) / A facturer -->
+    <record id="sales_en_cours_divers_to_invoice_action" model="ir.actions.act_window">
+        <field name="name">En cours (divers) - à facturer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="domain">[["invoice_status","=","to invoice"],["effective_date","!=",False],["team_id","not in", (5, 6, 8, 9)]]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des Commandes à facturer
+            </p>
+        </field>
+    </record>
+
+    <!-- Action En Cours (divers) / A comptabiliser -->
+    <record id="sales_en_cours_divers_to_post_action" model="ir.actions.act_window">
+        <field name="name">En cours (divers) - à comptabiliser</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'draft'), ('team_id', 'not in', (5, 6, 8, 9)), ('move_type', '=', 'out_invoice')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Liste des factures à comptabiliser
+            </p>
+        </field>
+    </record>
+
+    <!-- Top Menu Pièces -->
+    <menuitem id="menu_sales_pieces" parent="sale.sale_menu_root" groups="base.group_user" name="Pièces" sequence="0"/>
+
+    <!-- Menu Pièces / Devis -->
+    <menuitem action="sales_quotations_action" id="menu_sales_quotations" parent="ccite_studio.menu_sales_pieces"
+              groups="base.group_user"
+              sequence="1"/>
+
+    <!-- Menu Pièces / Commandes -->
+    <menuitem action="sales_sale_order_action" id="menu_sales_sale_order" parent="ccite_studio.menu_sales_pieces"
+              groups="base.group_user"
+              sequence="2"/>
+
+    <!-- Menu Pièces / Livraisons -->
+    <menuitem action="sales_stock_picking_action" id="menu_sales_stock_picking" parent="ccite_studio.menu_sales_pieces"
+              groups="base.group_user"
+              sequence="3"/>
+
+    <!-- Menu Pièces / Factures -->
+    <menuitem action="sales_account_invoices_action" id="menu_sales_account_invoices" parent="ccite_studio.menu_sales_pieces"
+              groups="base.group_user"
+              sequence="4"/>
+
+    <!-- Menu Pièces / Avoirs -->
+    <menuitem action="sales_account_refunds_action" id="menu_sales_account_refunds" parent="ccite_studio.menu_sales_pieces"
+              groups="base.group_user"
+              sequence="5"/>
+
+    <!-- Top Menu En cours (TER) -->
+    <menuitem id="menu_sales_en_cours_ter" parent="sale.sale_menu_root" groups="base.group_user" name="En cours (TER)" sequence="1"/>
+
+    <!-- Menu En cours (TER) / Devis -->
+    <menuitem action="sales_en_cours_ter_quotations_action" id="menu_sales_en_cours_ter_quotations"
+              parent="ccite_studio.menu_sales_en_cours_ter"
+              name="Devis"
+              groups="base.group_user"
+              sequence="1"/>
+
+    <!-- Menu En cours (TER) / Commandes -->
+    <menuitem action="sales_en_cours_ter_sale_order_action" id="menu_sales_en_cours_ter_sale_order"
+              parent="ccite_studio.menu_sales_en_cours_ter"
+              name="Commandes"
+              groups="base.group_user"
+              sequence="2"/>
+
+    <!-- Menu En cours (TER) / A livrer -->
+    <menuitem action="sales_en_cours_ter_stock_picking_action" id="menu_sales_en_cours_ter_stock_picking"
+              parent="ccite_studio.menu_sales_en_cours_ter"
+              name="A livrer"
+              groups="base.group_user"
+              sequence="3"/>
+
+    <!-- Menu En cours (TER) / A facturer -->
+    <menuitem action="sales_en_cours_ter_to_invoice_action" id="menu_sales_en_cours_ter_to_invoice"
+              parent="ccite_studio.menu_sales_en_cours_ter"
+              name="A facturer"
+              groups="base.group_user"
+              sequence="4"/>
+
+    <!-- Menu En cours (TER) / A comptabiliser -->
+    <menuitem action="sales_en_cours_ter_to_post_action" id="menu_sales_en_cours_ter_to_post"
+              parent="ccite_studio.menu_sales_en_cours_ter"
+              name="A comptabiliser"
+              groups="base.group_user"
+              sequence="5"/>
+
+    <!-- Top Menu En cours (TEL) -->
+    <menuitem id="menu_sales_en_cours_tel" parent="sale.sale_menu_root" groups="base.group_user" name="En cours (TEL)" sequence="2"/>
+
+    <!-- Menu En cours (TEL) / Devis -->
+    <menuitem action="sales_en_cours_tel_quotations_action" id="menu_sales_en_cours_tel_quotations"
+              parent="ccite_studio.menu_sales_en_cours_tel"
+              name="Devis"
+              groups="base.group_user"
+              sequence="1"/>
+
+    <!-- Menu En cours (TEL) / Commandes -->
+    <menuitem action="sales_en_cours_tel_sale_order_action" id="menu_sales_en_cours_tel_sale_order"
+              parent="ccite_studio.menu_sales_en_cours_tel"
+              name="Commandes"
+              groups="base.group_user"
+              sequence="2"/>
+
+    <!-- Menu En cours (TEL) / A livrer -->
+    <menuitem action="sales_en_cours_tel_stock_picking_action" id="menu_sales_en_cours_tel_stock_picking"
+              parent="ccite_studio.menu_sales_en_cours_tel"
+              name="A livrer"
+              groups="base.group_user"
+              sequence="3"/>
+
+    <!-- Menu En cours (TEL) / A facturer -->
+    <menuitem action="sales_en_cours_tel_to_invoice_action" id="menu_sales_en_cours_tel_to_invoice"
+              parent="ccite_studio.menu_sales_en_cours_tel"
+              name="A facturer"
+              groups="base.group_user"
+              sequence="4"/>
+
+    <!-- Menu En cours (TEL) / A comptabiliser -->
+    <menuitem action="sales_en_cours_tel_to_post_action" id="menu_sales_en_cours_tel_to_post"
+              parent="ccite_studio.menu_sales_en_cours_tel"
+              name="A comptabiliser"
+              groups="base.group_user"
+              sequence="5"/>
+
+    <!-- Top Menu En cours (reperes) -->
+    <menuitem id="menu_sales_en_cours_reperes" parent="sale.sale_menu_root" groups="base.group_user" name="En cours (repères)"
+              sequence="3"/>
+
+    <!-- Menu En cours (reperes) / Devis -->
+    <menuitem action="sales_en_cours_reperes_quotations_action" id="menu_sales_en_cours_reperes_quotations"
+              parent="ccite_studio.menu_sales_en_cours_reperes"
+              name="Devis"
+              groups="base.group_user"
+              sequence="1"/>
+
+    <!-- Menu En cours (reperes) / Commandes -->
+    <menuitem action="sales_en_cours_reperes_sale_order_action" id="menu_sales_en_cours_reperes_sale_order"
+              parent="ccite_studio.menu_sales_en_cours_reperes"
+              name="Commandes"
+              groups="base.group_user"
+              sequence="2"/>
+
+    <!-- Menu En cours (reperes) / A livrer -->
+    <menuitem action="sales_en_cours_reperes_stock_picking_action" id="menu_sales_en_cours_reperes_stock_picking"
+              parent="ccite_studio.menu_sales_en_cours_reperes"
+              name="A livrer"
+              groups="base.group_user"
+              sequence="3"/>
+
+    <!-- Menu En cours (reperes) / A facturer -->
+    <menuitem action="sales_en_cours_reperes_to_invoice_action" id="menu_sales_en_cours_reperes_to_invoice"
+              parent="ccite_studio.menu_sales_en_cours_reperes"
+              name="A facturer"
+              groups="base.group_user"
+              sequence="4"/>
+
+    <!-- Menu En cours (reperes) / A comptabiliser -->
+    <menuitem action="sales_en_cours_reperes_to_post_action" id="menu_sales_en_cours_reperes_to_post"
+              parent="ccite_studio.menu_sales_en_cours_reperes"
+              name="A comptabiliser"
+              groups="base.group_user"
+              sequence="5"/>
+
+    <!-- Top Menu En cours (divers) -->
+    <menuitem id="menu_sales_en_cours_divers" parent="sale.sale_menu_root" groups="base.group_user" name="En cours (divers)" sequence="4"/>
+
+    <!-- Menu En cours (divers) / Devis -->
+    <menuitem action="sales_en_cours_divers_quotations_action" id="menu_sales_en_cours_divers_quotations"
+              parent="ccite_studio.menu_sales_en_cours_divers"
+              name="Devis"
+              groups="base.group_user"
+              sequence="1"/>
+
+    <!-- Menu En cours (divers) / Commandes -->
+    <menuitem action="sales_en_cours_divers_sale_order_action" id="menu_sales_en_cours_divers_sale_order"
+              parent="ccite_studio.menu_sales_en_cours_divers"
+              name="Commandes"
+              groups="base.group_user"
+              sequence="2"/>
+
+    <!-- Menu En cours (divers) / A livrer -->
+    <menuitem action="sales_en_cours_divers_stock_picking_action" id="menu_sales_en_cours_divers_stock_picking"
+              parent="ccite_studio.menu_sales_en_cours_divers"
+              name="A livrer"
+              groups="base.group_user"
+              sequence="3"/>
+
+    <!-- Menu En cours (divers) / A facturer -->
+    <menuitem action="sales_en_cours_divers_to_invoice_action" id="menu_sales_en_cours_divers_to_invoice"
+              parent="ccite_studio.menu_sales_en_cours_divers"
+              name="A facturer"
+              groups="base.group_user"
+              sequence="4"/>
+
+    <!-- Menu En cours (divers) / A comptabiliser -->
+    <menuitem action="sales_en_cours_divers_to_post_action" id="menu_sales_en_cours_divers_to_post"
+              parent="ccite_studio.menu_sales_en_cours_divers"
+              name="A comptabiliser"
+              groups="base.group_user"
+              sequence="5"/>
+</odoo>

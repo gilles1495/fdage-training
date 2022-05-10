@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_team_form_inherit" model="ir.ui.view">
+        <field name="name">crm.team.form.inherit</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='members_users']" position="after">
+                <page name="crm_rules" string="Règles commerciales">
+                    <div>
+                        <label for="rule_quotations">Règles concernant les devis</label>
+                        <field name="rule_quotations" widget="html"/>
+                    </div>
+                    <div>
+                        <label for="rule_sale_order">Règles concernant les commandes</label>
+                        <field name="rule_sale_order" widget="html"/>
+                    </div>
+                    <div>
+                        <label for="rule_prospect">Règles concernant les prospects</label>
+                        <field name="rule_prospect" widget="html"/>
+                    </div>
+                    <div>
+                        <label for="rule_customer">Règles concernant les clients</label>
+                        <field name="rule_customer" widget="html"/>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

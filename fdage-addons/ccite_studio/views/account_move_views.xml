@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue arborescence Factures -->
+    <record id="account_invoice_tree_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.tree.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="partner_id_code"/>
+                <field name="partner_id_name"/>
+                <field name="partner_id_zip"/>
+                <field name="partner_id_city"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="replace">
+                <field name="partner_id" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_partner_display_name']" position="replace">
+                <field name="invoice_partner_display_name" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_total_in_currency_signed']" position="replace">
+                <field name="amount_total_in_currency_signed" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_origin']" position="replace">
+                <field name="invoice_origin" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_user_id']" position="replace">
+                <field name="invoice_user_id" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_residual_signed']" position="replace">
+                <field name="amount_residual_signed" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='invoice_user_id']" position="replace">
+                <field name="invoice_user_id" widget="many2one_avatar_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -80,42 +80,6 @@
         </field>
     </record>
 
-    <record id="sale_quotation_view_inherit" model="ir.ui.view">
-        <field name="name">sale.quotation.tree.inherit</field>
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_quotation_tree"/>
-        <field name="arch" type="xml">
-            <field name="create_date" position="replace">
-                <field name="date_order" widget="date"/>
-                <field name="wallet_date" widget="date" />
-            </field>
-            <field name="commitment_date" position="attributes">
-                <attribute name="widget">date</attribute>
-            </field>
-            <field name="partner_id" position="before">
-                <field name="partner_id_code" />
-            </field>
-            <field name="partner_id" position="after">
-                <field name="partner_id_city" />
-                <field name="partner_id_zip" />
-            </field>
-            <field name="amount_total" position="before">
-                <field name="total_ht_without_port" sum="Total HT hors frais de port"/>
-                <field name="total_port_value" sum="Total Frais de port"/>
-            </field>
-            <field name="expected_date" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </field>
-            <xpath expr="//tree" position="attributes">
-                <attribute name="decoration-danger">not all_lines_amount_within_10_pc_of_list_price</attribute>
-            </xpath>
-            <xpath expr="//tree" position="inside">
-                <field name="all_lines_amount_within_10_pc_of_list_price" invisible="1"/>
-            </xpath>
-        </field>
-    </record>
-
-
     <record id="view_sale_order_quotation_inherit_search" model="ir.ui.view">
       <field name="name">sale.order.quotation.search.expand.filter</field>
       <field name="model">sale.order</field>

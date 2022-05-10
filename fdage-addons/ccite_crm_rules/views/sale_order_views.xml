@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='customer_signature']" position="after">
+                <page name="crm_rules_quotations" string="Règles commerciales" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}">
+                    <field name="rule_quotations" widget="html"/>
+                </page>
+                <page name="crm_rules_sale_order" string="Règles commerciales" attrs="{'invisible': [('state', 'in', ('draft', 'sent'))]}">
+                    <field name="rule_sale_order" widget="html"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

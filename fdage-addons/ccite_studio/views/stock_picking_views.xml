@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue arborescence Livraisons -->
+    <record id="stock_picking_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']" position="replace">
+                <field name="location_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='location_dest_id']" position="replace">
+                <field name="location_dest_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='batch_id']" position="replace">
+                <field name="batch_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="printed" />
+            </xpath>
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="date_done" />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="partner_id_code" />
+                <field name="partner_id_name" />
+                <field name="partner_id_zip" />
+                <field name="partner_id_city" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="replace">
+                <field name="partner_id" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='backorder_id']" position="replace">
+                <field name="backorder_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

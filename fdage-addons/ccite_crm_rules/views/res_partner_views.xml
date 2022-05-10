@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="customer_rank" />
+                <field name="supplier_rank" />
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="crm_rules_prospect" string="Règles commerciales" attrs="{'invisible': ['|', '|', ('is_company', '=', False), ('supplier_rank', '&gt;', 0), ('customer_rank', '&gt;', 0)]}">
+                    <field name="rule_prospect" widget="html"/>
+                </page>
+                <page name="crm_rules_customer" string="Règles commerciales" attrs="{'invisible': ['|', '|', ('is_company', '=', False), ('supplier_rank', '&gt;', 0), ('customer_rank', '&lt;', 1)]}">
+                    <field name="rule_customer" widget="html"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

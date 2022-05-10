@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue arborescence bons de commande -->
+    <record id="sale_order_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="wallet_date" widget="date" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_id_zip" />
+                <field name="partner_id_city" />
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="before">
+                <field name="total_ht_without_port" />
+                <field name="total_port_value" />
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="after">
+                <field name="new_order" />
+                <field name="client_order_ref" />
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="replace">
+                <field name="amount_untaxed" optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="replace">
+                <field name="amount_total" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Vue arborescence devis  -->
+    <record id="sale_quotation_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.quotation.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="date_order" widget="date"/>
+                <field name="wallet_date" widget="date"/>
+            </xpath>
+            <xpath expr="//field[@name='commitment_date']" position="attributes">
+                <attribute name="widget">date</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_id_zip" />
+                <field name="partner_id_city" />
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="before">
+                <field name="total_ht_without_port" widget="monetary" sum="Total HT hors frais de port"/>
+                <field name="total_port_value" widget="monetary" sum="Total Frais de port"/>
+            </xpath>
+            <xpath expr="//field[@name='expected_date']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_untaxed']" position="replace">
+                <field name="amount_untaxed" widget="monetary" sum="Total HT" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='amount_total']" position="replace">
+                <field name="amount_total" widget="monetary" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='create_date']" position="replace">
+                <field name="create_date" optional="hide"/>
+            </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">not all_lines_amount_within_10_pc_of_list_price</attribute>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <field name="all_lines_amount_within_10_pc_of_list_price" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
